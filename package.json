@@ -1,0 +1,28 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./node_modules/nodemon/bin/nodemon app.js"
+  },
+  "author": "bver49",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.7.21",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.2",
+    "ejs-locals": "^1.0.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "express-validator": "^3.1.1",
+    "multer": "^1.2.1",
+    "multer-s3": "^2.5.0",
+    "mysql": "^2.11.1",
+    "nodemailer": "^2.7.0",
+    "nodemon": "^1.11.0",
+    "xlsx": "^0.8.0"
+  }
+}

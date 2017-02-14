@@ -1,0 +1,36 @@
+<% layout('../public/layout') %>
+<form class="ui form" id="refund">
+  <div id="error"></div>
+  <div class="field">
+    <label>退款帳戶</label>
+    <input type="text" name="accoutnumber">
+  </div>
+  <div class="field">
+    <label>退款原因</label>
+    <input type="text" name="content">
+  </div>
+  <button class="ui button" type="submit">Submit</button>
+</form>
+<script>
+  $("form#refund").submit(function(event){
+    event.preventDefault();
+    var formData = $("#refund").serialize();
+    $.ajax({
+      url: '/user/refund',
+      type: 'post',
+      data: formData,
+      success: function(response) {
+        if(response=="Success"){
+          console.log("x");
+        }
+        else{
+          $("#error").empty();
+          for (var i in response) {
+            var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+            $('#error').prepend(dom);
+          }
+        }
+      }
+    });
+  });
+</script>

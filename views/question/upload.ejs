@@ -1,0 +1,88 @@
+<div id="notselect">
+  <h1 class="h1 greens textcenter">上傳影片</h1>
+  <img src="/assets/img/upload.png" id="uploadicon">
+  <p class="h3 textcenter blacks" id="description">影片最大:800MB<br><br>影片格式:mp4</p>
+</div>
+<div id="select" style="display:none;">
+  <h1 class="h1 greens textcenter"><i class="checkmark icon"></i>選取完成</h1><br><br><br><br>
+  <div class="h3 blacks textcenter" id="reupload">重新上傳</div><br>
+  <div id="uploadbtn">上傳</div>
+</div>
+<div id="uploading" style="display:none;">
+  <h1 class="h1 greens textcenter">...上傳中...</h1><br><br>
+  <p class="h3 blacks textcenter">面試加油</p><br><br>
+  <div class="progressbar">
+    <span class="empty">
+    	<span class="filled"></span>
+    </span>
+  </div>
+  <a class="ui button greenbg center" href="/question/answer/">取消</a>
+</div>
+<form id="fileupload" enctype="multipart/form-data">
+  <input type="file" name="file" id="file">
+  <input type="hidden" name="question_id" value="<%= question.id %>">
+  <input type="submit" name="submit" value="送出" id="uploadsubmit">
+</form>
+<script>
+$(document).ready(function(){
+  var ajax;
+  //選擇檔案
+  $("#uploadicon").on("click",function(){
+    $("#file").click();
+  });
+  //選好檔案
+  $("#file").on('change',function(){
+    $("#notselect").hide();
+    $("#skipq").hide();
+    $("#select").show();
+  });
+  //上傳檔案
+  $("#uploadbtn").on("click",function(){
+    $("#uploadsubmit").click();
+    $("#select").hide();
+    $("#uploading").show();
+  });
+  //重新上傳
+  $("#reupload").on("click",function(){
+    $("#file").val('');
+    $("#notselect").show();
+    $("#skipq").show();
+    $("#select").hide();
+    $("#uploading").hide();
+  });
+  //發送至後端
+  $("form#fileupload").submit(function(event) {
+    event.preventDefault();
+    if($("#file").val()!=""){
+      var file = $("#file")[0].files[0];
+      if( file.size > (800 * 1024 * 1024)){
+        $("#file").val('');
+        alert("檔案大小超出限制(800mb)!");
+      }
+      else if( file.type != "video/mp4"){
+        $("#file").val('');
+        alert("請上傳mp4檔案!");
+      }
+      else{
+        var formData = new FormData($('#fileupload')[0]);
+        ajax = $.ajax({
+          url: '/answer/upload',
+          type: 'post',
+          data: formData,
+          cache: false,
+          processData: false,
+          contentType: false,
+          success: function(response){
+            if(response=="Success"){
+              window.location.href = window.location.href;
+            }
+          }
+        }).fail(function(msg) {
+          $("#file").val('');
+          alert("檔案上傳出錯!");
+        });
+      }
+    }
+  });
+});
+</script>

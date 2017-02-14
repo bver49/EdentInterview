@@ -1,0 +1,479 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, topmenu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, topmenu, nav, section {
+  display: block;
+}
+html{
+   min-height: 100%;
+}
+body {
+  line-height: 1;
+  min-height: 100%;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body, div, h1, h2, h3, p, a, .ui.button {
+  font-family: 'Noto Sans', helvetica, Microsoft JhengHei, serif, sans-serif, monospace;
+}
+body {
+  background-color: #f2f5f6;
+}
+.body {
+  margin-top: 50px;
+}
+.textcenter {
+  text-align: center;
+}
+.bold{
+  font-weight:bold;
+}
+.red {
+  color:red;
+}
+.reds{
+  color:#d92f6e;
+}
+.greens {
+  color: #3dabaf;
+}
+.blacks {
+  color: #293d58;
+}
+.h1 {
+  font-size: 1.75rem;
+}
+.h2 {
+  font-size: 1.5rem;
+}
+.h3 {
+  font-size: 1rem;
+}
+.whitebg {
+  background: white;
+}
+.headertitle {
+  width: 100%;
+  position: absolute;
+  z-index:20;
+  top: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+.ui.grid {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+/* Form */
+
+#error {
+  margin-bottom: 10px;
+}
+#error p {
+  padding-bottom: 10px;
+}
+.ui.form {
+  background: white;
+  padding: 50px;
+}
+.ui.radio.checkbox input:checked ~ .box:before,
+.ui.radio.checkbox input:checked ~ label:before,
+.ui.checkbox input:checked ~ .box:before,
+.ui.checkbox input:checked ~ label:before,
+.ui.checkbox .box:before,
+.ui.checkbox label:before,
+.ui.checkbox input:indeterminate ~ .box:before,
+.ui.checkbox input:indeterminate ~ label:before{
+  border: 2px solid #3dabaf;
+}
+.ui.button.greenbg {
+  color: white;
+  background: rgb(78, 184, 188);
+  display: block;
+  width: 88px;
+  height: 40px;
+  border-radius: 0px;
+  text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+  line-height: 1.75rem;
+}
+.ui.button.greenbd {
+  color: black;
+  background: white;
+  display: block;
+  width: 88px;
+  height: 40px;
+  border: 2px solid rgb(78, 184, 188);
+  border-radius: 0px;
+  text-align: center;
+  font-size: 1rem;
+  padding: 5px;
+}
+.ui.button.center {
+  margin: 40px auto 0 auto;
+}
+.ui.button.right {
+  line-height: 10px;
+  float: right;
+}
+.ui.button.left {
+  line-height: 26px;
+  float: left;
+}
+.ui.bottom.attached.button {
+  color: white;
+  background: #48b8bd;
+}
+
+/* question card */
+
+.topic {
+  line-height: 1.5rem;
+  color: rgb(78, 184, 188);
+}
+.meta {
+  color: #b3b6b5;
+  font-size: 0.8rem;
+}
+.oval {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 17px;
+  height: 17px;
+  background-color: #e85987;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* topmenu */
+
+.menu {
+  width: 100%;
+  height: 90px;
+}
+
+/* answer */
+
+#file, #uploadsubmit {
+  display: none;
+}
+.bottombtn {
+  cursor: pointer;
+  color: #3dabaf;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  text-align: center;
+  font-size: 1.75rem;
+  width: 100%;
+  padding: 25px 10px;
+  border-top: solid 2px #f1f5f6;
+}
+#uploadicon {
+  cursor: pointer;
+  display: block;
+  width: 20%;
+  margin: 40px auto;
+}
+#uploadbtn, #delbtn {
+  cursor: pointer;
+  padding: 15px 10px;
+  width: 50%;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  color: white;
+  font-size: 1.75rem;
+  border-radius: 9px;
+  background-color: #48b8bd;
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+.question_content {
+  padding: 50px;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  letter-spacing:4px;
+  color: #293d58;
+  word-wrap:break-word;
+}
+
+/* 進度條 */
+
+.progressbar .empty {
+  height: 15px;
+  display: block;
+  background: #f1f5f6;
+  width: 100%;
+  border-radius: 8px;
+}
+.progressbar .filled {
+  height: 15px;
+  display: block;
+  background: #e95987;
+  width: 0%;
+  margin-left: 75%;
+  border-radius: 8px;
+  transition: width .8s ease;
+  animation: progressbar 2s infinite linear;
+}
+@keyframes progressbar {
+  0% {
+    width: 0%;
+    margin-left: 0%;
+  }
+  20% {
+    width: 25%;
+    margin-left: 0%;
+  }
+  40% {
+    width: 25%;
+    margin-left: 25%;
+  }
+  60% {
+    width: 25%;
+    margin-left: 50%;
+  }
+  80% {
+    width: 25%;
+    margin-left: 75%;
+  }
+  100% {
+    width: 0%;
+    margin-left: 100%;
+  }
+}
+
+/* footer */
+
+.footer{
+  margin-top:100px;
+  width:100%;
+  background:#f2f5f6;
+  padding:60px 10px;
+  bottom: 0px;
+}
+
+.footer-left,.footer-right{
+  display:inline-block;
+}
+
+.footer-left{
+  width:65%;
+  padding-left:50px;
+  color:#3dabaf;
+  font-size:2em;
+  font-weight:bold;
+  line-height:2em;
+}
+
+.footer-right{
+  width:34%;
+  padding-left:50px;
+  color:#3dabaf;
+  font-size:2em;
+  font-weight:bold;
+}
+
+.footer-right a{
+  color:#3dabaf;
+}
+
+
+.avatar{
+  border-radius:50%;
+  display:block;
+  border: 2px solid #3dabaf;
+}
+.avatar img{
+  width:100%;
+  border-radius:50%;
+  height:100%;
+}
+
+#avatarmobile{
+  display:none;
+}
+
+@media screen and (min-width: 640px) {
+  .menu .background {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 90px;
+    background: #ffffff;
+  }
+  .menu .title {
+    position: relative;
+    z-index: 30;
+  }
+  .menu .title .logo {
+    float: left;
+    width: 52px;
+    height: 52px;
+    margin: 19px 2vw;
+  }
+  .menu .title .name {
+    float: left;
+    font-size: 30px;
+    line-height: 90px;
+    color: #3dabaf;
+  }
+  .menu .linkset {
+    float: right;
+  }
+  .menu .linkset .link {
+    position: relative;
+    z-index: 30;
+    float: left;
+    font-size: 20px;
+    line-height: 90px;
+    color: #293d58;
+    display: block;
+    margin: 0 2vw;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .menu .linkset .link:after {
+    position: relative;
+    content: '';
+    display: block;
+    margin: auto;
+    height: 5px;
+    top: -5px;
+    width: 0%;
+    background: #e95987;
+    transition: width .5s ease, background-color .5s ease;
+  }
+  .menu .linkset .link:hover:after {
+    width: 100%;
+  }
+  .menu .linkset .button {
+    position: relative;
+    z-index: 30;
+    float: right;
+    font-size: 16px;
+    color: #ffffff;
+    display: block;
+    padding: 8px 20px;
+    margin: 29px 2vw;
+    background: #3c5873;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+    transition: box-shadow .1s ease;
+    cursor: pointer;
+  }
+  .menu .linkset .button:hover {
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+@media screen and (max-width: 640px) {
+  .headertitle {
+    display:none;
+  }
+  #avatarmobile{
+    display:block;
+  }
+  #avatardesktop{
+    display:none;
+  }
+  .menu .background {
+    position: fixed;
+    z-index: 20;
+    width: 100vw;
+    height: 90px;
+    background: #ffffff;
+  }
+  .menu .title {
+    position: fixed;
+    text-align: center;
+    display: block;
+    left: 0;
+    right: 0;
+    z-index: 30;
+  }
+  .menu .title .logo {
+    width: 52px;
+    height: 52px;
+    margin: 19px 2vw;
+  }
+  .menu .title .name {
+    position: relative;
+    display: inline;
+    top: -33px;
+    font-size: 30px;
+    color: #3dabaf;
+  }
+  .menu .burger {
+    position: fixed;
+    top: 0px;
+    z-index: 30;
+    height: 90px;
+    width: 90px;
+    cursor: pointer;
+  }
+  .menu .burger span, .menu .burger span:before, .menu .burger span:after {
+    position: relative;
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    top: 45%;
+    width: 30px;
+    background: #3dabaf;
+  }
+  .menu .burger span:before {
+    top: -13px;
+  }
+  .menu .burger span:after {
+    top: 10px;
+  }
+  .menu .linkset {
+    position: fixed;
+    width: 100vw;
+    z-index: 10;
+    background: #fcfdfd;
+  }
+  .menu .linkset .link, .menu .linkset .button {
+    position: relative;
+    font-size: 20px;
+    color: #293d58;
+    display: block;
+    padding: 0px 0px 25px 30px;
+    top: 125px;
+    background: #fcfdfd;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .footer-left,.footer-right{
+    width:100%;
+    text-align:center;
+    padding:0px;
+  }
+  .footer-right{
+    padding-top:50px;
+  }
+  .question_content{
+    padding:25px;
+  }
+}

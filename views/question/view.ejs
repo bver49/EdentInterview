@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NCKU HUB</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="x">
+  <meta property="og:title" content="x" />
+  <meta property="og:url" content="x" />
+  <meta property="og:site_name" content="x" />
+  <meta property="og:description" content="x" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/assets/js/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/semantic.css">
+  <link rel='stylesheet' href='/assets/css/style.css' />
+</head>
+
+<body>
+  <div class="menu">
+    <div class="background"></div>
+    <div class="stuffing"></div>
+    <div class="title">
+    	<a href="/question/">
+        <img class="logo" src="/assets/img/logo.png">
+    	  <p class="name">醫甸面試</p>
+      </a>
+    </div>
+    <div class="burger"><span></span></div>
+  	<div class="linkset">
+      <a href="/question/answer" class="link">題目練習</a>
+      <a href="/question/view" class="link">抽題練習</a>
+      <a href="/question/" class="link">答題紀錄</a>
+      <a href="/user/edit/" class="link">個人資料</a>
+      <a href="/user/logout" class="button">登出</a>
+    </div>
+  </div>
+  <div class="ui stackable grid" style="margin-top:5px;">
+    <div class="sixteen wide column">
+      <div class="question_content">
+      </div>
+    </div>
+  </div>
+  <div class="ui stackable grid">
+    <div class="eight wide column whitebg">
+      <div style="height:35px;line-height:35px;cursor:pointer;" class="h1 greens textcenter bold" id="prevq">上一題</div>
+    </div>
+    <div class="eight wide column whitebg">
+      <div style="height:35px;line-height:35px;cursor:pointer;" class="h1 greens textcenter bold" id="nextq">下一題</div>
+    </div>
+  </div>
+  <script>
+    var question = <%- JSON.stringify(question) %>;
+    var index = 0;
+    var length = question.length;
+    $(document).ready(function() {
+      $(".question_content").append(question[index].content);
+      $(".question_content").height($(document).height()-290);
+      $("#nextq").on("click",function(){
+        next();
+      });
+      $("#prevq").on("click",function(){
+        prev();
+      });
+    });
+    function adjustheight(){
+      $(".question_content").css("height","auto");
+      if($(".question_content").height()<$(document).height()){
+        $(".question_content").height($(document).height()-290);
+      }
+    }
+    function next(){
+      index++;
+      if(index>length-1){
+        index=0;
+      }
+      $(".question_content").empty();
+      $(".question_content").append(question[index].content);
+      adjustheight();
+    }
+    function prev(){
+      index--;
+      if(index<0){
+        index=length-1;
+      }
+      $(".question_content").empty();
+      $(".question_content").append(question[index].content);
+      adjustheight();
+    }
+  </script>
+</body>
+
+</html>

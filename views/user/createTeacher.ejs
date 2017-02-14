@@ -1,0 +1,59 @@
+<% layout('../public/layout') %>
+<div class="ui stackable grid centered">
+  <div class="six wide column">
+    <form class="ui form" id="signup">
+      <div id="error"></div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>電子信箱</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="text" name="email">
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>密碼</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="password" name="pw">
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>密碼確認</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="password" name="pw2">
+        </div>
+      </div>
+      <input type="hidden" name="status" value="2">
+      <button class="ui button greenbg center" type="submit">送出</button>
+    </form>
+  </div>
+</div>
+  <script>
+    $("form#signup").submit(function(event) {
+      event.preventDefault();
+      var formData = $("#signup").serialize();
+      $.ajax({
+        url: '/user/create_t',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+          if (response == "Success") {
+            window.location.href = "/question/";
+          } else if (response == "Dup") {
+            $("#error").empty();
+            $("#error").prepend("<p style='color:red;'>電子信箱已使用</p>");
+          } else {
+            $("#error").empty();
+            for (var i in response) {
+              var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+              $('#error').prepend(dom);
+            }
+          }
+        }
+      });
+    });
+  </script>

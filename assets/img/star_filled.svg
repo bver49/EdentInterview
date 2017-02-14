@@ -1,0 +1,22 @@
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In  -->
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="210.4px" height="200.1px" viewBox="0 0 210.4 200.1" style="enable-background:new 0 0 210.4 200.1;"
+	 xml:space="preserve">
+<g>
+	<polygon class="star_fill" points="105.2,164.8 41.5,198.3 53.7,127.4 2.1,77.1 73.4,66.8 105.2,2.3 137,66.8 208.2,77.1 156.7,127.4 
+		168.9,198.3 	"/>
+	<path class="star_line" d="M105.2,4.5l30.7,62.2l0.5,0.9l1,0.2l68.7,10l-49.7,48.4l-0.8,0.7l0.2,1l11.7,68.4l-61.4-32.3l-0.9-0.5
+		l-0.9,0.5l-61.4,32.3L54.6,128l0.2-1l-0.8-0.7L4.3,77.8l68.7-10l1-0.2l0.5-0.9L105.2,4.5 M105.2,0L72.7,65.9L0,76.4l52.6,51.3
+		l-12.4,72.4l65-34.2l65,34.2l-12.4-72.4l52.6-51.3l-72.7-10.6L105.2,0L105.2,0z"/>
+</g>
+<style>
+.star_fill {
+	fill: #48b8bd;
+}
+
+.star_line {
+	fill: #48b8bd;
+}
+</style>
+</svg>

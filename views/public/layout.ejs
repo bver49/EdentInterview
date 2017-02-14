@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NCKU HUB</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="x">
+  <meta property="og:title" content="x"/>
+  <meta property="og:url" content="x"/>
+  <meta property="og:site_name" content="x"/>
+  <meta property="og:description" content="x"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/semantic.css">
+  <link rel='stylesheet' href='/assets/css/style.css' />
+</head>
+
+<body>
+
+  <div class="menu">
+    <div class="background"></div>
+    <div class="stuffing"></div>
+    <div class="title">
+    	<a href="/">
+        <img class="logo" src="/assets/img/logo.png">
+    	  <p class="name">醫甸面試</p>
+      </a>
+    </div>
+    <div class="burger"><span></span></div>
+    <% if(typeof title !== 'undefined'){ %>
+      <p class="h2 headertitle blacks"><%= title %></p>
+    <% }else{ %>
+    	<div class="linkset">
+        <% if(user && user.edit==1){ %>
+          <% if(user.status < 2 && user.edit!= 0){ %>
+            <a href="https://fbshare.medcode.in/" class="link">面試秘笈</a>
+            <a href="/question/answer" class="link">模擬影片問答</a>
+            <a href="/question/view" class="link">看面試題</a>
+            <a href="/question/" class="link">答題紀錄</a>
+            <a href="/user/edit/" class="link">個人資料</a>
+          <% } else if(user.status==2){ %>
+            <a href="/question/" class="link">改卷</a>
+            <a href="/user/edit/" class="link">個人資料</a>
+          <% } else if(user.status==3){ %>
+            <a href="/question/" class="link">答題情形</a>
+            <a href="/user/edit/" class="link">個人資料</a>
+            <a href="/user/adminuser?s=1" class="link">管理用戶</a>
+            <a href="/user/addTeacher" class="link">新增老師</a>
+          <% } %>
+          <a href="/user/logout" class="button">登出</a>
+        <% }else if(user && user.edit==0){ %>
+          <a href="/user/logout" class="button">登出</a>
+        <% }else{ %>
+          <a href="https://fbshare.medcode.in/" class="link">面試秘笈</a>
+          <a href="/faq" class="link">常見問題</a>
+          <a href="/user/signup" style="color:rgb(229,92,135);" class="link">馬上註冊</a>
+          <a href="/user/login" class="link">登入</a>
+          <a href="" class="link"></a>
+          <a href="" class="link"></a>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+  <div class="body">
+    <%- body %>
+  </div>
+  <div class="footer">
+    <div class="footer-left">醫甸園科技股份有限公司 All right reserve</div>
+    <div class="footer-right">
+      <a href="#">聯絡我們</a>
+      ｜
+      <a href="/privacy">隱私權政策</a>
+    </div>
+  </div>
+</body>
+</html>

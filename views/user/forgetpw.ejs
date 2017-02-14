@@ -1,0 +1,53 @@
+<% layout('../public/layout') %>
+<div class="ui stackable grid" id="part1">
+  <div class="six wide column centered">
+    <form class="ui form" id="newpw">
+      <h1 class="textcenter greens h1 bold">忘記密碼</h1><br>
+      <p class="textcenter blacks bold">請輸入註冊的信箱<br><br>我們會將重設密碼的連結寄給您</p>
+      <div id="error"></div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>信箱</label>
+        </div>
+        <div class="ten wide field">
+          <input type="text" name="email">
+        </div>
+      </div>
+      <button class="ui button greenbg center" type="submit">送出</button>
+    </form>
+  </div>
+</div>
+<div class="ui stackable grid" id="part2" style="display:none;">
+  <div class="six wide column centered whitebg">
+    <div style="width:80%;display:block;margin:0 auto;">
+      <br><br>
+      <h1 class="h3 blacks textcenter bold">更新連結已發送至註冊時使用的信箱</h1>
+      <a href="/" class="ui button greenbg center">回首頁</a>
+      <br><br>
+    </div>
+  </div>
+</div>
+  <script>
+    $("form#newpw").submit(function(event){
+      event.preventDefault();
+      var formData = $("#newpw").serialize();
+      $.ajax({
+        url: '/user/forgetpw',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+          if(response=="Success"){
+            $("#part1").remove();
+            $("#part2").show();
+          }
+          else{
+            $("#error").empty();
+            for (var i in response) {
+              var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+              $('#error').prepend(dom);
+            }
+          }
+        }
+      });
+    });
+  </script>

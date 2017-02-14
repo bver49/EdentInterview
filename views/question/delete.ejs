@@ -1,0 +1,25 @@
+<form id="delete">
+  <input type="hidden" name="aid" value="<%= answer[0].id %>">
+  <input type="hidden" name="awskey" value="<%= answer[0].awskey %>">
+  <input type="submit" name="submit" value="刪除" id="delsubmit" style="display:none">
+</form>
+<div id="delbtn">刪除</div>
+<script>
+  $("#delbtn").on("click",function(){
+    $("#delsubmit").click();
+  });
+  $("form#delete").submit(function(event) {
+    event.preventDefault();
+    var formData = $("#delete").serialize();
+    $.ajax({
+      url: '/answer/delete',
+      type: 'post',
+      data: formData,
+      success: function(response) {
+        if(response=="Success"){
+          window.location.href=window.location.href;
+        }
+      }
+    });
+  });
+</script>

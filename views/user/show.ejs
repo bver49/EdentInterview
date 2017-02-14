@@ -1,0 +1,567 @@
+<% layout('../public/layout') %>
+<div class="ui stackable grid centered">
+  <% if(data.status==0){ %>
+    <a href="/user/authorize/<%= data.id %>" class="ui button greenbg">驗證</a>
+  <% } %>
+  <a href="/user/del/<%= data.id %>" class="ui button greenbg">刪除</a>
+</div>
+<% if(data.status==1 || data.status==0){ %>
+  <div class="ui stackable grid centered">
+    <div class="seven wide column">
+      <form class="ui form" id="updateA">
+        <h1 class="textcenter greens h1">基本資料</h1><br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>真實姓名</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="name" value="<%= data.name %>" readonly>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>就讀學校</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="nowschool" value="<%= data.nowschool %>" readonly>
+          </div>
+        </div><br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>生日</label>
+          </div>
+          <div class="ten wide field">
+            <select id="years" name="y" disabled></select><span class="greens">/</span>&nbsp;&nbsp;
+            <select id="months" name="m" disabled></select>&nbsp;&nbsp;<span class="greens">/</span>&nbsp;&nbsp;
+            <select id="days" name="d" disabled></select>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="six wide field">
+            <label>是否為應屆</label>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="justgraduate" class="hidden" value="1" disabled>
+              <label>是</label>
+            </div>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="justgraduate" class="hidden" value="0" disabled>
+              <label>否</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="six wide field">
+            <label>性別</label>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="gender" class="hidden" value="男" disabled>
+              <label>男</label>
+            </div>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="gender" class="hidden" value="女" disabled>
+              <label>女</label>
+            </div>
+          </div>
+        </div>
+        <% if(data.account!="0"){ %>
+          <br>
+          <div class="inline fields">
+            <div class="four wide field">
+              <label>帳戶末5碼</label>
+            </div>
+            <div class="ten wide field">
+              <input type="text" name="account" value="<%= data.account %>" readonly>
+            </div>
+          </div>
+        <% } %>
+        <br>
+      </form>
+    </div>
+  </div>
+  <div class="ui stackable grid centered">
+    <div class="seven wide column">
+      <form class="ui form" id="updateB">
+        <h1 class="textcenter greens h1">報考學校</h1>
+        <br>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>醫學系</label>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="台大醫學" disabled/>
+              <label>台大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="北醫醫學" disabled/>
+              <label>北醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="國防醫學" disabled/>
+              <label>國防</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="輔仁醫學" disabled/>
+              <label>輔仁</label>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="馬偕醫學" disabled/>
+              <label>馬偕</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="陽明醫學" disabled/>
+              <label>陽明</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="長庚醫學" disabled/>
+              <label>長庚</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中國醫醫學" disabled/>
+              <label>中國醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中山醫醫學" disabled/>
+              <label>中山醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="成大醫學" disabled/>
+              <label>成大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="高醫醫學" disabled/>
+              <label>高醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="慈濟醫學" disabled/>
+              <label>慈濟</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>牙醫系</label>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="台大牙" disabled/>
+              <label>台大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="國防牙" disabled/>
+              <label>國防</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="北醫牙" disabled/>
+              <label>北醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="陽明牙" disabled/>
+              <label>陽明</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中國牙" disabled/>
+              <label>中國醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中山牙" disabled/>
+              <label>中山醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="高醫牙" disabled/>
+              <label>高醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+      </form>
+    </div>
+  </div>
+  <div class="ui stackable grid centered">
+    <div class="seven wide column">
+      <form class="ui form" id="updateC">
+        <h1 class="textcenter greens h1">向未來的學長姐介紹你自己</h1><br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>興趣</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="hobby" value="<%= data.hobby %>" readonly>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>個性</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="person" value="<%= data.person %>" readonly>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>優點</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="adv" value="<%= data.adv %>" readonly>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>缺點</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="disadv" value="<%= data.disadv %>" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="field">
+          <label>請以一句話形容你自己</label>
+          <input type="text" name="oneword" value="<%= data.oneword %>" readonly>
+        </div>
+        <br>
+      </form>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('.ui.radio.checkbox').checkbox();
+
+      for (i = new Date().getFullYear(); i > 1980; i--) {
+        $('#years').append($('<option />').val(i).html(i));
+      }
+      for (i = 1; i < 13; i++) {
+        $('#months').append($('<option />').val(i).html(i));
+      }
+
+      updateNumberOfDays();
+
+      $('#years, #months').change(function() {
+        updateNumberOfDays();
+      });
+
+      function updateNumberOfDays() {
+        $('#days').html('');
+        month = $('#months').val();
+        year = $('#years').val();
+        days = daysInMonth(month, year);
+        for (i = 1; i < days + 1; i++) {
+          $('#days').append($('<option />').val(i).html(i));
+        }
+      }
+      function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+      var birth = "<%= data.birth %>";
+      birth = birth.split("/");
+      $("input[value=<%= data.gender %>]").attr("checked", true);
+      $("#years option[value="+birth[0]+"]").prop({selected: true});
+      $("#months option[value="+birth[1]+"]").prop({selected: true});
+      $("#days option[value="+birth[2]+"]").prop({selected: true});
+      var school = '<%= data.school %>'.split(",");
+      for (var i in school){
+        $("input[value=" + school[i] + "]").attr("checked", true);
+      }
+    });
+  </script>
+<% }else{ %>
+  <div class="ui stackable grid centered">
+    <div class="seven wide column">
+      <form class="ui form" id="updateD">
+        <h1 class="textcenter greens h1">老師基本資料</h1><br><br><br>
+        <div class="inline fields" id="avatarmobile">
+          <div class="six wide field">
+            <div class="avatar" style="margin: 0 auto;">
+              <img src="../../../<%= data.avatar %>">
+            </div>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>真實姓名</label>
+          </div>
+          <div class="six wide field">
+            <input type="text" name="name" value="<%= data.name %>" readonly>
+          </div>
+          <div class="six wide field" id="avatardesktop">
+            <div class="avatar">
+              <img src="../../../<%= data.avatar %>">
+            </div>
+          </div>
+        </div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>就讀學校</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="nowschool" value="<%= data.nowschool %>" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="six wide field">
+            <label>性別</label>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="gender" class="hidden" value="男" disabled>
+              <label>男</label>
+            </div>
+          </div>
+          <div class="five wide field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="gender" class="hidden" value="女" disabled>
+              <label>女</label>
+            </div>
+          </div>
+        </div>
+        <br>
+      </form>
+    </div>
+  </div>
+  <div class="ui stackable grid centered">
+    <div class="seven wide column">
+      <form class="ui form" id="updateE">
+        <h1 class="textcenter greens h1">面試過的校系</h1>
+        <br>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>醫學系</label>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="台大醫學" disabled/>
+              <label>台大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="北醫醫學" disabled/>
+              <label>北醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="國防醫學" disabled/>
+              <label>國防</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="輔仁醫學" disabled/>
+              <label>輔仁</label>
+            </div>
+          </div>
+          <br>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="馬偕醫學" disabled/>
+              <label>馬偕</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="陽明醫學" disabled/>
+              <label>陽明</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="長庚醫學" disabled/>
+              <label>長庚</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中國醫醫學" disabled/>
+              <label>中國醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中山醫醫學" disabled/>
+              <label>中山醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="成大醫學" disabled/>
+              <label>成大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="高醫醫學" disabled/>
+              <label>高醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="慈濟醫學" disabled/>
+              <label>慈濟</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>牙醫系</label>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="台大牙" disabled/>
+              <label>台大</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="國防牙" disabled/>
+              <label>國防</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="北醫牙" disabled/>
+              <label>北醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="陽明牙" disabled/>
+              <label>陽明</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中國牙" disabled/>
+              <label>中國醫</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="中山牙" disabled/>
+              <label>中山醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="inline fields">
+          <div class="four wide field">
+          </div>
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="school" value="高醫牙" disabled/>
+              <label>高醫</label>
+            </div>
+          </div>
+        </div>
+        <br>
+      </form>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('.ui.radio.checkbox').checkbox();
+      $("input[value=<%= data.gender %>]").attr("checked", true);
+      var school = '<%= data.school %>'.split(",");
+      for (var i in school){
+        $("input[value=" + school[i] + "]").attr("checked", true);
+      }
+      $(".avatar").width("80px");
+      $(".avatar").height("80px");
+    });
+  </script>
+<% } %>

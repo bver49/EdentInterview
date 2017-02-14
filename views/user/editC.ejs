@@ -1,0 +1,80 @@
+<div class="ui stackable grid centered">
+  <div class="seven wide column">
+    <form class="ui form" id="updateC">
+      <h1 class="textcenter greens h1">向未來的學長姐介紹你自己</h1><br>
+      <div id="errorC"></div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>興趣</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="text" name="hobby" value="<%= user.hobby %>" placeholder="請不要寫看漫畫、打電腦、看電視">
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>個性</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="text" name="person" value="<%= user.person %>" placeholder="例如內向、活潑、執行力強、專注力強">
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>優點</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="text" name="adv" value="<%= user.adv %>" placeholder="例如：有愛心、喜歡幫助入">
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>缺點</label>
+        </div>
+        <div class="twelve wide field">
+          <input type="text" name="disadv" value="<%= user.disadv %>" placeholder="例如：易與他人吵架、漫不經心">
+        </div>
+      </div>
+      <br>
+      <div class="field">
+        <label>請以一句話形容你自己</label>
+        <input type="text" name="oneword" value="<%= user.oneword %>">
+      </div>
+      <br>
+      <% if(status){ %>
+        <a class="ui button greenbd left" href="/user/editB">上一步</a>
+        <button class="ui button greenbd right" type="submit">完成</button>
+      <% }else{ %>
+        <button class="ui button greenbd right" type="submit">更新</button>
+      <% } %>
+      <br>
+      <br>
+    </form>
+  </div>
+</div>
+<script>
+  $("form#updateC").submit(function(event) {
+    event.preventDefault();
+    var formData = $("#updateC").serialize();
+    $.ajax({
+      url: '/user/updateC',
+      type: 'put',
+      data: formData,
+      success: function(response) {
+        if (response == "Success") {
+          <% if(status){ %>
+            window.location.href = "/question/answer";
+          <% }else{ %>
+            window.location.href = window.location.href;
+          <% } %>
+        } else {
+          $("#errorC").empty();
+          for (var i in response) {
+            var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+            $('#errorC').prepend(dom);
+          }
+        }
+      }
+    });
+  });
+</script>

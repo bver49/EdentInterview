@@ -1,0 +1,79 @@
+<% layout('../public/layout') %>
+<% if(user){ %>
+  <% if(user.account == 0){ %>
+    <div class="ui stackable grid">
+      <div class="six wide column centered">
+        <form class="ui form" id="notice">
+          <h1 class="textcenter greens h1">您尚未完成驗證</h1><br>
+          <p class="textcenter blacks">請您提供以下資訊</p><br>
+          <div id="error"></div>
+          <div class="inline fields">
+            <div class="six wide field">
+              <label>轉帳帳號後五碼</label>
+            </div>
+            <div class="ten wide field">
+              <input type="text" name="accoutnumber">
+            </div>
+          </div>
+          <button class="ui button greenbg center" type="submit">送出</button>
+        </form>
+      </div>
+    </div>
+  <script>
+    $("form#notice").submit(function(event){
+      event.preventDefault();
+      var formData = $("#notice").serialize();
+      $.ajax({
+        url: '/user/notice',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+          if(response=="Success"){
+            window.location.href = window.location.href;
+          }
+          else{
+            $("#error").empty();
+            for (var i in response) {
+              var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+              $('#error').prepend(dom);
+            }
+          }
+        }
+      });
+    });
+  </script>
+  <% }else{ %>
+    <div class="ui stackable grid">
+      <div class="six wide column centered whitebg">
+        <div style="width:80%;display:block;margin:0 auto;">
+          <br><br><br>
+          <h1 class="textcenter greens h1">已收到您的轉帳資料</h1>
+          <br><br><br>
+          <p class="textcenter blacks h3">我們將於2個工作日內確認您的資料，並寄發開通連結至<%= user.email %>請您耐心等後，謝謝！</p>
+          <br><br>
+          <a href="/user/logout" class="ui button greenbg center">回首頁</a>
+          <br><br><br><br><br>
+        </div>
+      </div>
+    </div>
+  <% } %>
+<% }else{ %>
+  <div class="ui stackable grid">
+    <div class="six wide column centered whitebg">
+      <div style="width:80%;display:block;margin:0 auto;line-height:1.8rem;">
+        <br>
+        <h1 class="textcenter greens h1">註冊成功</h1>
+        <br>
+        <p class="blacks h3">您好，我們已經寄發繳費資訊到<%= email %></p>
+        <p>請檢查您的信箱，請於3日內繳費，以利帳號的開通！</p><br>
+        <p>繳費資訊</p>
+        <p>銀行：中國信託</p>
+        <p>帳號：234540216706</p>
+        <p>戶名：醫甸園科技股份有限公司</p>
+        <br>
+        <a href="/user/logout" class="ui button greenbg center">回首頁</a>
+        <br>
+      </div>
+    </div>
+  </div>
+<% } %>

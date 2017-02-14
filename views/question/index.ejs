@@ -1,0 +1,78 @@
+<% layout('../public/layout') %>
+<% if(question.length > 0){ %>
+  <div class="ui stackable grid">
+    <% for(var i in question){ %>
+      <% var tag = question[i].tag.split(",") %>
+      <% var date = new Date(question[i].created_at) %>
+      <% if(i%3==0){ %>
+        <div class="row">
+          <div class="two wide column computer only"></div>
+      <% } %>
+      <div class="four wide column">
+        <div class="ui card" style="margin:0 auto;">
+          <div class="content">
+            <div class="topic">
+              <% for(var j in question[i].content){ %>
+                <% if(j>50) break; %>
+                <%= question[i].content[j] %>
+              <% } %>
+              ...
+            </div><br>
+            <!-- 學生:老師已回覆 學生未讀 -->
+            <!-- 老師:學生已回覆 老師未讀 -->
+            <% if((user.status ==1 && question[i].status == 2) || (user.status ==2 && question[i].status == 1) ){ %>
+              <div class="oval"></div>
+            <% } %>
+            <!-- 學生/管理員:老師回覆情形 -->
+            <% if(user.status!=2){ %>
+              <% if(question[i].camt == 0){ %>
+                <div style="color:#d92f6e;">尚未回覆</div><br>
+              <% }else{ %>
+                <div style="color:#293d58;">回饋老師: <%= question[i].teacher_name %></div><br>
+              <% } %>
+            <% }else if(user.status==2){ %>
+              <% if(question[i].camt == 0){ %>
+                <div style="color:#d92f6e;">尚未回覆</div><br>
+              <% }else{ %>
+                <div style="color:#293d58;">已回覆</div><br>
+              <% } %>
+            <% } %>
+            <div class="meta">
+              <% for(var k in tag){ %>
+                <% if(k>2) break; %>
+                <%= "#"+tag[k] %>&nbsp;&nbsp;
+              <% } %>
+              <!-- 學生:出題目的時間 -->
+              <% if(user.status==1){ %>
+                <br><br>
+                <%= date.getFullYear()+"/"+date.getMonth()+1+"/"+date.getDate() %>
+                &nbsp;
+                <%= date.getHours()+":"+date.getMinutes() %>
+              <!-- 老師/管理員:學生回答時間 -->
+              <% }else if(user.status!=1 && question[i].answertime){ %>
+                <br><br>
+                <% var answerdate = new Date(question[i].answertime) %>
+                學生回答時間 :&nbsp;
+                <%= answerdate.getFullYear()+"/"+answerdate.getMonth()+1+"/"+answerdate.getDate() %>
+                &nbsp;
+                <%= answerdate.getHours()+":"+answerdate.getMinutes() %>
+              <% } %>
+            </div>
+          </div>
+          <a href="/question/<%= question[i].id %>" class="ui bottom attached button">進入</a>
+        </div>
+      </div>
+      <% if(i%3==2){ %>
+        </div>
+      <% } %>
+    <% } %>
+  </div>
+<% }else{ %>
+  <div style="display:block;height:100px;"></div>
+  <% if(user.status == 1){ %>
+    <h1 class="textcenter blacks h1">尚未回答題目</h1>
+  <% }else{ %>
+    <h1 class="textcenter blacks h1">目前尚未有題目</h1>
+  <% } %>
+  <div style="display:block;height:200px;"></div>
+<% } %>

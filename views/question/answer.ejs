@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NCKU HUB</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="x">
+  <meta property="og:title" content="x" />
+  <meta property="og:url" content="x" />
+  <meta property="og:site_name" content="x" />
+  <meta property="og:description" content="x" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/assets/js/semantic.js"></script>
+  <script src="/assets/js/index.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/semantic.css">
+  <link rel='stylesheet' href='/assets/css/style.css' />
+</head>
+
+<body>
+  <div class="menu">
+    <div class="background"></div>
+    <div class="stuffing"></div>
+    <div class="title">
+    	<a href="/question/">
+        <img class="logo" src="/assets/img/logo.png">
+    	  <p class="name">醫甸面試</p>
+      </a>
+    </div>
+    <div class="burger"><span></span></div>
+  	<div class="linkset">
+      <a href="https://fbshare.medcode.in/" class="link">面試秘笈</a>
+      <a href="/question/answer" class="link">模擬影片問答</a>
+      <a href="/question/view" class="link">看面試題</a>
+      <a href="/question/" class="link">答題紀錄</a>
+      <a href="/user/edit/" class="link">個人資料</a>
+      <a href="/user/logout" class="button">登出</a>
+    </div>
+  </div>
+  <div class="ui stackable grid" style="margin-top:5px;">
+    <div class="five wide column whitebg" id="answerarea">
+      <br><br>
+      <!-- 尚未回答題目 -->
+      <% if(answer.length < 1 && question.user_id == user.id){ %>
+        <% include ./upload %>
+        <div class="bottombtn" id="skipq">跳過這一題</div>
+        <!-- 有回答題目 -->
+      <% }else if(answer.length > 0){ %>
+        <h1 class="h1 greens textcenter"><i class="checkmark icon"></i>完成</h1><br><br>
+        <video width="100%" controls>
+          <source src="<%= answer[0].url %>" type="video/mp4">
+        </video>
+        <% include ./delete %>
+        <!-- 如果還能要求題目 -->
+        <% if(user.status == 1 && user.qmt < 12 ){ %>
+          <div class="bottombtn" id="nextq">下一題</div>
+        <% } %>
+      <% } %>
+    </div>
+    <div class="eleven wide column">
+      <div class="question_content">
+        <%= question.content %>
+      </div>
+    </div>
+  </div>
+  <% if(user.qmt==1 && answer.length == 0){ %>
+    <div class="ui  modal">
+      <div class="header blacks">模擬問答影片流程說明</div>
+      <div class="content">
+        <p class="blacks bold">1. 本站自動根據您報考學校給您一道道模擬面試題目</p><br>
+        <p class="blacks bold">2. 使用手機相機錄製影片，對鏡頭模擬臨場面試「回答」此題，講出你的答案</p><br>
+        <p class="blacks bold">3. 回到本網站頁面，按下上傳按鈕，上傳剛剛那段影片</p><br>
+        <p class="blacks bold">4. 系統將自動分配影片給某位優秀學長姐，幫您批改影片，給您回應、指出優缺點、應該改進建議......等等（本服務提供12次接受學長姐回應機會）。</p>
+      </div>
+      <div class="actions">
+        <div class="ui greenbg ok button" style="margin:0 auto;">我知道了</div>
+      </div>
+    </div>
+  <% } %>
+  <script>
+    $(document).ready(function() {
+      <% if(user.qmt==1 && answer.length == 0){ %>
+        $('.ui.modal').modal('show');
+      <% } %>
+      if($(document).width() > 640){
+        $("#answerarea").height($(document).height() - 120);
+      }
+      else{
+        $("#answerarea").height($("#answerarea").height()+100);
+      }
+      <% if(user.status == 1 && user.qmt < 12 ){ %>
+        $("#nextq").on('click', function() {
+          $.ajax({
+            url: '/question/create/<%= question.id %>/<%= question.questionlist_id %>',
+            type: 'post',
+            success: function(response) {
+              if(response=="Success"){
+                window.location.href = "/question/answer";
+              }
+              else{
+                window.location.href = "/question/";
+              }
+            }
+          });
+        });
+      <% } %>
+      $("#skipq").on('click', function() {
+        $.ajax({
+          url: '/question/skipq/<%= question.id %>/<%= question.questionlist_id %>',
+          type: 'post',
+          success: function(response) {
+            if(response=="Success"){
+              window.location.href = "/question/answer";
+            }
+            else{
+              window.location.href = "/question/";
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<% layout('../public/layout') %>
+  <form class="ui form" id="comment">
+    <div id="error"></div>
+    <div class="field">
+      <input type="textarea" name="content">
+      <input type="hidden" name="question_id" value="<%= question.id %>">
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+  <script>
+    $("form#comment").submit(function(event) {
+      event.preventDefault();
+      var formData = $("#comment").serialize();
+      $.ajax({
+        url: '/comment/create',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+          if (response == "Success") {
+            window.location.href = window.location.href;
+          }
+          else {
+            $("#error").empty();
+            for (var i in response) {
+              var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+              $('#error').prepend(dom);
+            }
+          }
+        }
+      });
+    });
+  </script>

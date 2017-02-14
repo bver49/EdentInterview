@@ -1,0 +1,159 @@
+<div class="ui stackable grid centered">
+  <div class="seven wide column">
+    <form class="ui form" id="updateD">
+      <h1 class="textcenter greens h1">老師基本資料</h1><br><br><br>
+      <div id="errorD"></div>
+      <div class="inline fields" id="avatarmobile">
+        <div class="six wide field">
+          <div class="avatar" style="margin: 0 auto;">
+            <img src="../../../<%= user.avatar %>">
+          </div>
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>真實姓名</label>
+        </div>
+        <div class="six wide field">
+          <input type="text" name="name" value="<%= user.name %>">
+        </div>
+        <div class="six wide field" id="avatardesktop">
+          <div class="avatar">
+            <img src="../../../<%= user.avatar %>">
+          </div>
+        </div>
+      </div>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>就讀學校</label>
+        </div>
+        <div class="ten wide field">
+          <input type="text" name="nowschool" value="<%= user.nowschool %>">
+        </div>
+      </div><br>
+      <div class="inline fields">
+        <div class="four wide field">
+          <label>大頭貼</label>
+        </div>
+        <div class="ten wide field">
+          <input type="file" name="avatar" id="avatar">
+        </div>
+      </div>
+      <br>
+      <div class="inline fields grade">
+        <div class="four wide field">
+          <label>年級</label>
+        </div>
+        <div class="four wide field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="grade" class="hidden" value="一">
+            <label>一</label>
+          </div>
+        </div>
+        <div class="four wide field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="grade" class="hidden" value="二">
+            <label>二</label>
+          </div>
+        </div>
+        <div class="four wide field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="grade" class="hidden" value="三">
+            <label>三</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="inline fields">
+        <div class="six wide field">
+          <label>性別</label>
+        </div>
+        <div class="five wide field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="gender" class="hidden" value="男">
+            <label>男</label>
+          </div>
+        </div>
+        <div class="five wide field">
+          <div class="ui radio checkbox">
+            <input type="radio" name="gender" class="hidden" value="女">
+            <label>女</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <% if(status){ %>
+        <button class="ui button greenbd right" type="submit">下一步</button>
+      <% }else{ %>
+        <button class="ui button greenbd right" type="submit">更新</button>
+      <% } %>
+      <br>
+      <br>
+    </form>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.ui.radio.checkbox').checkbox();
+    $(".avatar").width("80px");
+    $(".avatar").height("80px");
+    <% if(!status){ %>
+      $("input[value=<%= user.gender %>]").attr("checked", true);
+      $(".grade input[value=<%= user.grade %>]").attr("checked",true);
+    <% } %>
+
+    $("form#updateD").submit(function(event) {
+      event.preventDefault();
+      <% if(status){ %>
+        var updateurl = '/user/updateD?check=1';
+        var file = $("#avatar")[0].files[0];
+        if( file.size > (3 * 1024 * 1024)){
+          $("#avatar").val('');
+          alert("大頭貼大小超出限制(3mb)!");
+        }else{
+          update(updateurl);
+        }
+      <% }else{ %>
+        if($('#avatar').val()!=""){
+          var updateurl = '/user/updateD?check=1';
+          var file = $("#avatar")[0].files[0];
+          if( file.size > (3 * 1024 * 1024)){
+            $("#avatar").val('');
+            alert("大頭貼大小超出限制(3mb)!");
+          }else{
+            update(updateurl);
+          }
+        }else{
+          var updateurl = '/user/updateD';
+          update(updateurl);
+        }
+      <% } %>
+    });
+  });
+  function update(updateurl){
+    var formData = new FormData($('#updateD')[0]);
+    $.ajax({
+      url:updateurl,
+      type: 'put',
+      data: formData,
+      cache: false,
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        if (response == "Success") {
+          <% if(status){ %>
+            window.location.href = '/user/editE';
+          <% }else{ %>
+            window.location.href = window.location.href;
+          <% } %>
+        } else {
+          $("#errorD").empty();
+          for (var i in response) {
+            var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+            $('#errorD').prepend(dom);
+          }
+        }
+      }
+    });
+  }
+</script>

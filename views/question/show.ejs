@@ -1,0 +1,234 @@
+<% layout('../public/layout') %>
+<link rel='stylesheet' href='/assets/css/history.css' />
+<a href="/question/">
+	<div class="return">
+		<img class="backico" src="/assets/img/back.png">
+		<p class="backtxt">返回</p>
+	</div>
+</a>
+<% if(user.status==1){ %>
+	<div class="content">
+		<div class="upper">
+			<div class="preview">
+				<video width="100%" controls>
+					<source src="<%= answer.url %>" type="video/mp4">
+				</video>
+			</div>
+			<div class="showquestion">
+				<p class="title">題目：</p><br>
+				<p class="h3"><%= question.content %></p>
+			</div>
+		</div>
+		<div class="lower">
+			<div class="left">
+				<br><br>
+				<h1 class="title textcenter">負責老師</h1>
+				<div class="roundpic">
+					<img class="photo" src="../../<%= teacher.avatar %>">
+				</div>
+				<p class="personal">
+					姓名 :　<%= teacher.name %><br>
+					學校 :　<%= teacher.nowschool %><br>
+					面試過的學校 :　<%= teacher.school.replace(/,/g,"、") %><br>
+				</p>
+				<% if(comment.length>0 && comment[0].rate != null ){ %>
+					<div class="ratingstar">
+						<img class="star" id="star1">
+						<img class="star" id="star2">
+						<img class="star" id="star3">
+						<img class="star" id="star4">
+						<img class="star" id="star5">
+					</div>
+					<p class="subject"><%= comment[0].suggest %></p>
+				<% }else if(comment.length>0){ %>
+					<p class="subject">對於這則回饋滿意嗎？</p>
+					<div class="ratingstar">
+						<img class="star" id="star1">
+						<img class="star" id="star2">
+						<img class="star" id="star3">
+						<img class="star" id="star4">
+						<img class="star" id="star5">
+					</div>
+					<p class="subject">其他建議：</p>
+					<form id="suggestform">
+						<div id="error"></div>
+						<textarea class="suggestion" name="suggest"></textarea>
+						<input type="hidden" name="rate" value="" id="rate">
+					</form>
+					<div id="suggestsubmit" class="send">送出</div>
+				<% } %>
+			</div>
+			<div class="right">
+				<% if(comment.length>0){ %>
+					<% var date = new Date(comment[0].created_at) %>
+					<h1 class="title">老師回饋&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="replytime">
+							<%= date.getFullYear()+"/"+date.getMonth()+1+"/"+date.getDate() %>
+							&nbsp;
+							<%= date.getHours()+":"+date.getMinutes() %>
+						</span>
+					</h1>
+					<div class="replycont">
+						<%- comment[0].content %>
+					</div>
+				<% }else{ %>
+					<h1 class="title">老師回饋</h1>
+					<p class="replycont">
+						老師尚未回覆請稍等
+					</p>
+				<% } %>
+			</div>
+		</div>
+	</div>
+	<script>adjustpic();</script>
+<% }else{ %>
+	<div class="content">
+		<div class="upper">
+			<div class="preview">
+				<video width="100%" controls>
+					<source src="<%= answer.url %>" type="video/mp4">
+				</video>
+			</div>
+			<div class="showquestion">
+				<p class="title">題目：</p><br>
+				<p class="h3"><%= question.content %></p>
+			</div>
+		</div>
+		<div class="lower">
+			<div class="left">
+				<br><br><br>
+				<h1 class="title textcenter">學生資料</h1>
+				<p class="personal">
+					姓名 :　<%= student.name %><br>
+					學校 :　<%= student.nowschool %><br>
+					報名面試學校 :　<%= student.school.replace(/,/g,"、") %><br>
+				</p>
+				<% if(comment.length>0 && comment[0].rate != null ){ %>
+					<div class="ratingstar">
+						<img class="star" id="star1">
+						<img class="star" id="star2">
+						<img class="star" id="star3">
+						<img class="star" id="star4">
+						<img class="star" id="star5">
+					</div>
+					<p class="subject"><%= comment[0].suggest %></p>
+				<% } %>
+			</div>
+			<div class="right">
+				<% if(comment.length>0){ %>
+					<% var date = new Date(comment[0].created_at) %>
+					<h1 class="title">老師回饋&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="replytime">
+							<%= date.getFullYear()+"/"+date.getMonth()+1+"/"+date.getDate() %>
+							&nbsp;
+							<%= date.getHours()+":"+date.getMinutes() %>
+						</span>
+					</h1>
+					<div class="replycont">
+						<%- comment[0].content %>
+					</div>
+				<% }else{ %>
+					<h1 class="title">老師回饋</h1>
+					<div class="replyform">
+						<form id="commentform">
+							<div id="error"></div>
+							<textarea name="content" id="comment"></textarea>
+							<input type="hidden" name="question_id" value="<%= question.id %>">
+							<button class="ui button greenbg center" type="submit">送出</button>
+						</form>
+					</div>
+				<% } %>
+			</div>
+		</div>
+	</div>
+<% } %>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>
+$(document).ready(function() {
+	$('.star').attr("src","/assets/img/star_empty.svg");
+	tinymce.baseURL = "/assets/js/tinymce";
+	tinymce.init({
+	  selector: '#comment',
+	  height: "250",
+	  menubar: false,
+		language:'zh_TW',
+		setup: function (editor) {
+		 editor.on('change', function () {
+				 editor.save();
+		 });
+	 	},
+	  plugins: [
+	    'advlist autolink lists link charmap print preview anchor',
+	    'searchreplace visualblocks code fullscreen',
+	    'insertdatetime media table contextmenu paste code wordcount'
+	  ],
+	  toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link',
+	});
+
+	var israted = 0 ;
+	$('.star').click(function(){
+		if (israted == 0) {
+			israted = 1 ;
+			var stars = $(this).attr("id").replace("star", "");
+			$("#rate").val(stars);
+			for ( i = 1 ; i <= stars ; i ++) {
+				$('#star'+i).attr("src", "/assets/img/star_filled.svg");
+			}
+		}
+		else if (israted == 1) {
+			israted = 0 ;
+			for ( i = 1 ; i <= 5 ; i ++) {
+				$('#star'+i).attr("src", "/assets/img/star_empty.svg");
+			}
+		}
+	});
+
+	$("form#commentform").submit(function(event) {
+		event.preventDefault();
+		var formData = $("#commentform").serialize();
+		$.ajax({
+			url: '/comment/create',
+			type: 'post',
+			data: formData,
+			success: function(response) {
+				console.log(response);
+				if (response == "Success") {
+					window.location.href = window.location.href;
+				} else {
+					$("#error").empty();
+					for (var i in response) {
+						var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+						$('#error').prepend(dom);
+					}
+				}
+			}
+		});
+	});
+	<% if(comment.length>0 && comment[0].rate != null ){ %>
+		var rate = <%= comment[0].rate %>;
+		$("#star"+rate).click();
+		$(".star").off();
+	<% }else if (comment.length >0){ %>
+		$("#suggestsubmit").on('click',function(){
+			var formData = $("#suggestform").serialize();
+			$.ajax({
+				url: '/comment/rate/<%= comment[0].id %>',
+				type: 'post',
+				data: formData,
+				success: function(response) {
+					console.log(response);
+					if (response == "Success") {
+						window.location.href = window.location.href;
+					} else {
+						$("#error").empty();
+						for (var i in response) {
+							var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+							$('#error').prepend(dom);
+						}
+					}
+				}
+			});
+		});
+	<% } %>
+});
+</script>

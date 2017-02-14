@@ -1,0 +1,64 @@
+<% layout('../public/layout') %>
+<% if(status==1){ %>
+    <% include ./editA %>
+<% }else if(status==2){ %>
+  <% include ./editB %>
+<% }else if(status==3){ %>
+  <% include ./editC %>
+<% }else if(status==4){ %>
+  <% include ./editD %>
+<% }else if(status==5){ %>
+  <% include ./editE %>
+<% }else{ %>
+  <div class="ui stackable grid">
+    <div class="seven wide column centered">
+      <form class="ui form" id="editpw">
+        <h1 class="textcenter greens h1">更新密碼</h1><br>
+        <div id="error"></div>
+        <div class="inline fields">
+          <div class="four wide field">
+            <label>新密碼</label>
+          </div>
+          <div class="ten wide field">
+            <input type="hidden" name="id" value="<%= user.id %>">
+            <input type="password" name="newpw">
+          </div>
+        </div>
+        <br>
+        <button class="ui button greenbd right" type="submit">更新</button>
+        <br><br>
+      </form>
+    </div>
+  </div><br><br>
+  <script>
+    $("form#editpw").submit(function(event){
+      event.preventDefault();
+      var formData = $("#editpw").serialize();
+      $.ajax({
+        url: '/user/editpw',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+          if(response=="Success"){
+            window.location.href = window.location.href;
+          }
+          else{
+            $("#error").empty();
+            for (var i in response) {
+              var dom = "<p style='color:red;'>" + response[i].msg + "</p>";
+              $('#error').prepend(dom);
+            }
+          }
+        }
+      });
+    });
+  </script>
+  <% if(user.status < 2){ %>
+    <% include ./editA %><br><br>
+    <% include ./editB %><br><br>
+    <% include ./editC %>
+  <% }else if(user.status == 2){ %>
+    <% include ./editD %><br><br>
+    <% include ./editE %>
+  <% } %>
+<% } %>
