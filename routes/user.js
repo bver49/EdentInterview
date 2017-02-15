@@ -191,7 +191,8 @@ router.get('/edit', function(req, res) {
   } else {
     res.render('user/edit', {
       'user': req.user,
-      'status': 0
+      'status': 0,
+      'notify':(req.query.upload)?1:0
     });
   }
 });

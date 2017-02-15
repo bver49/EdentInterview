@@ -1,4 +1,6 @@
 <% layout('../public/layout') %>
+<script src="/assets/js/toastr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/css/toastr.min.css">
 <% if(status==1){ %>
     <% include ./editA %>
 <% }else if(status==2){ %>
@@ -31,6 +33,11 @@
     </div>
   </div><br><br>
   <script>
+    <% if(notify =="1"){ %>
+      $(document).ready(function() {
+        toastr.success('更新成功!');
+      });
+    <% } %>
     $("form#editpw").submit(function(event){
       event.preventDefault();
       var formData = $("#editpw").serialize();

@@ -5,7 +5,7 @@ var mailer = require('../email');
 
 /* 老師回饋 */
 router.post('/create', function(req, res) {
-  req.checkBody('content', '回覆需大於200字').len(0);
+  req.checkBody('content', '回覆需大於200字').len(200);
   var errors = req.validationErrors();
   if (errors) {
     res.send(errors);

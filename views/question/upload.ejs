@@ -75,7 +75,7 @@ $(document).ready(function(){
           contentType: false,
           success: function(response){
             if(response=="Success"){
-              window.location.href = window.location.href;
+              window.location.href = window.location.href+"?upload=yes";
             }
           }
         }).fail(function(msg) {

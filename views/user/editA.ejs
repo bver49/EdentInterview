@@ -113,7 +113,7 @@
           <% if(status){ %>
             window.location.href = '/user/editB';
           <% }else{ %>
-            window.location.href = window.location.href;
+            window.location.href = window.location.href+"?upload=yes";
           <% } %>
         } else {
           $("#errorA").empty();

@@ -65,7 +65,7 @@
           <% if(status){ %>
             window.location.href = "/question/answer";
           <% }else{ %>
-            window.location.href = window.location.href;
+            window.location.href = window.location.href+"?upload=yes";
           <% } %>
         } else {
           $("#errorC").empty();

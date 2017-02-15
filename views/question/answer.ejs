@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>醫甸面試</title>
   <meta charset="UTF-8">
@@ -13,6 +12,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/assets/js/semantic.js"></script>
   <script src="/assets/js/index.js"></script>
+  <script src="../assets/js/toastr.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../assets/css/toastr.min.css">
   <link rel="stylesheet" type="text/css" href="/assets/css/semantic.css">
   <link rel='stylesheet' href='/assets/css/style.css' />
 </head>
@@ -50,6 +51,8 @@
         <video width="100%" controls>
           <source src="<%= answer[0].url %>" type="video/mp4">
         </video>
+        <br><br>
+        <p class="textcenter bold blacks">記得按下下一題 才會發給學長姐批改</p>
         <% include ./delete %>
         <!-- 如果還能要求題目 -->
         <% if(user.status == 1 && user.qmt < 12 ){ %>
@@ -80,6 +83,9 @@
   <% } %>
   <script>
     $(document).ready(function() {
+      <% if(notify =="1"){ %>
+        toastr.success('上傳成功!');
+      <% } %>
       <% if(user.qmt==1 && answer.length == 0){ %>
         $('.ui.modal').modal('show');
       <% } %>

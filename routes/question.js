@@ -250,7 +250,8 @@ router.get('/answer', checklogin(), function(req, res) {
           res.render('question/answer', {
             'user': req.user,
             'question': question[0],
-            'answer': answer
+            'answer': answer,
+            'notify':(req.query.upload)?1:0
           });
           db = null;
           delete db;
