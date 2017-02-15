@@ -211,7 +211,7 @@ body {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
 }
 .question_content {
-  padding: 50px;
+  padding: 40px;
   line-height: 2rem;
   font-size: 1.5rem;
   letter-spacing:4px;
@@ -317,6 +317,9 @@ body {
 }
 
 @media screen and (min-width: 640px) {
+  .mobile{
+    display:none;
+  }
   .menu .background {
     position: absolute;
     z-index: 20;
@@ -397,6 +400,9 @@ body {
   }
   #avatardesktop{
     display:none;
+  }
+  .mobile{
+    display:block;
   }
   .menu .background {
     position: fixed;
