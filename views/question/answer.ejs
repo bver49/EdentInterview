@@ -83,18 +83,13 @@
   <% } %>
   <script>
     $(document).ready(function() {
+      answerarearesize();
       <% if(notify =="1"){ %>
         toastr.success('上傳成功!');
       <% } %>
       <% if(user.qmt==1 && answer.length == 0){ %>
         $('.ui.modal').modal('show');
       <% } %>
-      if($(document).width() > 640){
-        $("#answerarea").height($(document).height() - 120);
-      }
-      else{
-        $("#answerarea").height($("#answerarea").height()+100);
-      }
       <% if(user.status == 1 && user.qmt < 12 ){ %>
         $("#nextq").on('click', function() {
           $.ajax({
@@ -126,6 +121,17 @@
         });
       });
     });
+
+    function answerarearesize(){
+      alert($(document).width());
+      alert($(window).width())
+      if($(document).width() > 640){
+        $("#answerarea").height($(document).height() - 120);
+      }
+      else{
+        $("#answerarea").height($("#answerarea").height()+100);
+      }
+    }
   </script>
 </body>
 
