@@ -171,6 +171,7 @@
 </div>
 <script>
   $(document).ready(function() {
+    $('.ui.checkbox').checkbox();
     var school = '<%= user.school %>'.split(",");
     for (var i in school) {
       $("input[value=" + school[i] + "]").attr("checked", true);
