@@ -41,31 +41,35 @@ $(document).ready(function(){
   //上傳檔案
   $("#uploadbtn").on("click",function(){
     $("#uploadsubmit").click();
-    $("#select").hide();
-    $("#uploading").show();
   });
   //重新上傳
   $("#reupload").on("click",function(){
+    resetpage();
+  });
+  function resetpage(){
     $("#file").val('');
     $("#notselect").show();
     $("#skipq").show();
     $("#select").hide();
     $("#uploading").hide();
-  });
+  }
   //發送至後端
   $("form#fileupload").submit(function(event) {
     event.preventDefault();
     if($("#file").val()!=""){
       var file = $("#file")[0].files[0];
       if( file.size > (800 * 1024 * 1024)){
-        $("#file").val('');
+        resetpage();
         alert("檔案大小超出限制(800mb)!");
+
       }
       else if( file.type != "video/mp4"){
-        $("#file").val('');
+        resetpage();
         alert("請上傳mp4檔案!");
       }
       else{
+        $("#select").hide();
+        $("#uploading").show();
         var time = (file.size/(100*1024*1024))*180;
         var min = Math.floor(time/60);
         var second = Math.floor(time%60);

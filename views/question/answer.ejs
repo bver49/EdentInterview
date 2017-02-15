@@ -124,10 +124,10 @@
 
     function answerarearesize(){
       if($(document).width() > 640){
-        $("#answerarea").height($(document).height() - 120);
+        $("#answerarea").css("height",($(document).height() - 120));
       }
       else{
-        $("#answerarea").height($("#answerarea").height()+100);
+        $("#answerarea").css("height",($("#answerarea").height()+150));
       }
     }
   </script>
