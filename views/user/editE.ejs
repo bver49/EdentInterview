@@ -171,11 +171,12 @@
 </div>
 <script>
   $(document).ready(function() {
-    $('.ui.checkbox').checkbox();
-    var school = '<%= user.school %>'.split(",");
-    for (var i in school) {
-      $("input[value=" + school[i] + "]").attr("checked", true);
-    }
+    <% if(status==0){ %>
+      var school = '<%= user.school %>'.split(",");
+      for (var i in school) {
+        $("input[value=" + school[i] + "]").attr("checked", true);
+      }
+    <% } %>
   });
   $("form#updateE").submit(function(event) {
     event.preventDefault();

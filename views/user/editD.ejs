@@ -97,7 +97,7 @@
     $('.ui.radio.checkbox').checkbox();
     $(".avatar").width("80px");
     $(".avatar").height("80px");
-    <% if(!status){ %>
+    <% if(status==0){ %>
       $("input[value=<%= user.gender %>]").attr("checked", true);
       $(".grade input[value=<%= user.grade %>]").attr("checked",true);
     <% } %>
