@@ -251,7 +251,7 @@ router.get('/answer', checklogin(), function(req, res) {
             'user': req.user,
             'question': question[0],
             'answer': answer,
-            'notify':(typeof req.query.upload !== "undefined" )?1:0
+            'notify':(req.query.upload)?1:0
           });
           db = null;
           delete db;

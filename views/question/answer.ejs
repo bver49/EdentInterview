@@ -83,7 +83,9 @@
   <% } %>
   <script>
     $(document).ready(function() {
-      answerarearesize();
+      window.onload = function(){
+        answerarearesize();
+      };
       <% if(notify =="1"){ %>
         toastr.success('上傳成功!');
       <% } %>
