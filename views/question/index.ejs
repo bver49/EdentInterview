@@ -18,13 +18,12 @@
               <% } %>
               ...
             </div><br>
-            <!-- 學生:老師已回覆 學生未讀 -->
-            <!-- 老師:學生已回覆 老師未讀 -->
+            <!-- 老師:學生已回覆 老師未讀  學生:老師已回覆 學生未讀-->
             <% if((user.status ==1 && question[i].status == 2) || (user.status ==2 && question[i].status == 1) ){ %>
               <div class="oval"></div>
             <% } %>
             <!-- 學生/管理員:老師回覆情形 -->
-            <% if(user.status!=2){ %>
+            <% if(user.status==1){ %>
               <% if(question[i].camt == 0){ %>
                 <div style="color:#d92f6e;">尚未回覆</div><br>
               <% }else{ %>
@@ -35,6 +34,12 @@
                 <div style="color:#d92f6e;">尚未回覆</div><br>
               <% }else{ %>
                 <div style="color:#293d58;">已回覆</div><br>
+              <% } %>
+            <% }else if(user.status ==3 ){ %>
+              <% if(question[i].camt == 0){ %>
+                <div style="color:#d92f6e;">尚未回覆（負責老師：<%= question[i].teacher_name %>）</div><br>
+              <% }else{ %>
+                <div style="color:#293d58;">回饋老師：<%= question[i].teacher_name %></div><br>
               <% } %>
             <% } %>
             <div class="meta">
