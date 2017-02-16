@@ -47,7 +47,7 @@
         data: formData,
         success: function(response) {
           if(response=="Success"){
-            window.location.href = window.location.href;
+            window.location.href = window.location.href+"?upload=yes";
           }
           else{
             $("#error").empty();
