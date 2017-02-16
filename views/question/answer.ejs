@@ -43,29 +43,27 @@
   <div class="ui stackable grid" style="margin-top:5px;">
     <div class="five wide column whitebg" id="answerarea">
       <br><br>
-      <% if(user.qmt <=12){ %>
+      <!-- 如果分配到的題目在12題以內 -->
+      <% if(user.qmt <= 12){ %>
         <!-- 尚未回答題目 -->
-        <% if(answer.length < 1 && question.user_id == user.id){ %>
+        <% if(answer.length < 1){ %>
           <% include ./upload %>
           <div class="bottombtn" id="skipq">跳過這一題</div>
           <!-- 有回答題目 -->
-        <% }else if(answer.length > 0){ %>
+        <% }else{ %>
           <h1 class="h1 greens textcenter"><i class="checkmark icon"></i>完成</h1><br><br>
-          <video width="100%" controls>
+          <video width="100%" controls id="video">
             <source src="<%= answer[0].url %>" type="video/mp4">
           </video>
           <br><br>
           <p class="textcenter bold blacks">記得按下下一題 才會發給學長姐批改</p>
           <% include ./delete %>
-          <!-- 如果還能要求題目 -->
-          <% if(user.status == 1){ %>
-            <div class="bottombtn" id="nextq">下一題</div>
-          <% } %>
+          <div class="bottombtn" id="nextq">下一題</div>
         <% } %>
       <% }else{ %>
         <br><br><br><br>
-        <p class="textcenter bold blacks h3">12題的額度已使用完畢</p><br>
-        <p class="textcenter bold blacks h3">無法再上傳影片給老師批改</p>
+        <p class="textcenter bold blacks h2">12題的額度已使用完畢</p><br><br>
+        <p class="textcenter bold blacks h2">無法再上傳影片給老師批改</p>
         <a class="bottombtn" href="/question/">回首頁</a>
       <% } %>
     </div>
@@ -76,6 +74,7 @@
       </div>
     </div>
   </div>
+  <!-- 新手指引 -->
   <% if(user.qmt==1 && answer.length == 0){ %>
     <div class="ui  modal">
       <div class="header blacks">模擬問答影片流程說明</div>
@@ -93,7 +92,7 @@
   <script>
     $(document).ready(function() {
       window.onload = function(){
-        answerarearesize();
+        resize();
       };
       <% if(notify =="1"){ %>
         toastr.success('上傳成功!');
@@ -101,7 +100,7 @@
       <% if(user.qmt==1 && answer.length == 0){ %>
         $('.ui.modal').modal('show');
       <% } %>
-      <% if(user.status == 1 && user.qmt < 12 ){ %>
+      <% if(user.qmt <= 12 && answer.length > 0){ %>
         $("#nextq").on('click', function() {
           $.ajax({
             url: '/question/create/<%= question.id %>/<%= question.questionlist_id %>',
@@ -116,29 +115,33 @@
             }
           });
         });
-      <% } %>
-      $("#skipq").on('click', function() {
-        $.ajax({
-          url: '/question/skipq/<%= question.id %>/<%= question.questionlist_id %>',
-          type: 'post',
-          success: function(response) {
-            if(response=="Success"){
-              window.location.href = "/question/answer";
+      <% }else if(user.qmt <= 12 && answer.length < 1){ %>
+        $("#skipq").on('click', function() {
+          $.ajax({
+            url: '/question/skipq/<%= question.id %>/<%= question.questionlist_id %>',
+            type: 'post',
+            success: function(response) {
+              if(response=="Success"){
+                window.location.href = "/question/answer";
+              }
+              else{
+                window.location.href = "/question/";
+              }
             }
-            else{
-              window.location.href = "/question/";
-            }
-          }
+          });
         });
-      });
+      <% } %>
     });
 
-    function answerarearesize(){
+    function resize(){
       if($(document).width() > 640){
         $("#answerarea").css("height",($(document).height() - 90));
       }
       else{
         $("#answerarea").css("height",($("#answerarea").height()+150));
+        <% if(answer.length > 0){ %>
+          $("#video").css("height","240");
+        <% } %>
       }
     }
   </script>

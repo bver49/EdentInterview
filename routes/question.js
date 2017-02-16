@@ -52,12 +52,11 @@ function give_question(db, schoolist, questionlist, callback) {
   }
   //學生所選的tag都沒題目可以挑了
   else {
-    if(questionlist.length>0){
+    if (questionlist.length > 0) {
       db.select().field("*").from("exam").where("id NOT IN", questionlist).limit(1).run(function(exam) {
         callback(exam);
       });
-    }
-    else{
+    } else {
       db.select().field("*").from("exam").limit(1).run(function(exam) {
         callback(exam);
       });
@@ -105,12 +104,12 @@ router.get('/', checklogin(), function(req, res) {
 
 /* 下一題 */
 router.post('/create/:id/:qlid', function(req, res) {
-  if (req.user && req.user.status == 1 && req.user.qmt < 12) {
+  if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
     var db = new dbsystem();
     //挑出一位老師
-    db.select().field(["id", "name","email","(SELECT COUNT(*) FROM question WHERE question.teacher_id = user.id ) AS qmt"]).from("user").where("status=2").order("qmt").order("id").limit(1).run(function(teacher) {
-      db.select().field(["id","content"]).from("question").where("id=",req.params.id).run(function(question){
-        mailer.noticeTeacher(req.user,teacher[0],question[0]);
+    db.select().field(["id", "name", "email", "(SELECT COUNT(*) FROM question WHERE question.teacher_id = user.id ) AS qmt"]).from("user").where("status=2").order("qmt").order("id").limit(1).run(function(teacher) {
+      db.select().field(["id", "content"]).from("question").where("id=", req.params.id).run(function(question) {
+        mailer.noticeTeacher(req.user, teacher[0], question[0]);
         //將狀態更新為學生已回答分配老師
         var data = {
           teacher_id: teacher[0].id,
@@ -118,7 +117,7 @@ router.post('/create/:id/:qlid', function(req, res) {
           status: 1
         }
         db.update().table("question").set(data).where("id=", req.params.id).run(function(result) {
-          db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function(result){
+          db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function(result) {
             db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=", 1).run(function(questionlist) {
               var list = [];
               for (var i in questionlist) {
@@ -126,7 +125,7 @@ router.post('/create/:id/:qlid', function(req, res) {
               }
               var school = req.user.school.split(",");
               //篩選題目
-              give_question(db, school,list, function(exam) {
+              give_question(db, school, list, function(exam) {
                 if (exam.length > 0) {
                   var data = {
                     exam_id: exam[0].id,
@@ -162,9 +161,9 @@ router.post('/create/:id/:qlid', function(req, res) {
 
 /* 跳過一題 */
 router.post('/skipq/:id/:qlid', function(req, res) {
-  if (req.user && req.user.status == 1 && req.user.qmt < 12) {
+  if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
     var db = new dbsystem();
-    db.update().table("questionlist").set({skip:1}).where("id=", req.params.qlid).run(function() {
+    db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function() {
       db.delete().from("question").where("id=", req.params.id).run(function() {
         db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=",1).run(function(questionlist) {
           var list = [];
@@ -244,20 +243,19 @@ router.get('/answer', checklogin(), function(req, res) {
   } else {
     var db = new dbsystem();
     //有分配到題目了 找出最新的一題
-    db.select().field("*").from("question").where("user_id=", req.user.id).where("teacher_id=",0).order("created_at", false).run(function(question) {
-      if(question.length>0){
+    db.select().field("*").from("question").where("user_id=", req.user.id).where("teacher_id=", 0).order("created_at", false).run(function(question) {
+      if (question.length > 0) {
         db.select().field("*").from("answer").where("question_id=", question[0].id).run(function(answer) {
           res.render('question/answer', {
             'user': req.user,
             'question': question[0],
             'answer': answer,
-            'notify':(req.query.upload)?1:0
+            'notify': (req.query.upload) ? 1 : 0
           });
           db = null;
           delete db;
         });
-      }
-      else{
+      } else {
         res.redirect("/question/");
       }
     });
@@ -265,12 +263,12 @@ router.get('/answer', checklogin(), function(req, res) {
 });
 
 //瀏覽題庫
-router.get('/view',checklogin(), function(req, res){
+router.get('/view', checklogin(), function(req, res) {
   var db = new dbsystem();
-  db.select().field(["id","content"]).from("exam").run(function(question) {
+  db.select().field(["id", "content"]).from("exam").run(function(question) {
     res.render('question/view', {
       'user': req.user,
-      'question':question
+      'question': question
     });
   });
 });
@@ -279,10 +277,12 @@ router.get('/view',checklogin(), function(req, res){
 router.get('/:id', checklogin(), function(req, res) {
   var db = new dbsystem();
   db.select().field("*").from("question").where("id=", req.params.id).run(function(question) {
-    if(question.length > 0){
+    if (question.length > 0) {
       if ((question[0].status == 2 && req.user.status == 1) || (question[0].status == 1 && req.user.status == 2)) {
         //將狀態更新為老師或學生已讀
-        db.update().table("question").set({status:0}).where("id=", req.params.id).run(function(result){});
+        db.update().table("question").set({
+          status: 0
+        }).where("id=", req.params.id).run(function(result) {});
       }
       //題目屬於該學生
       if (question[0].user_id == req.user.id) {
@@ -327,7 +327,7 @@ router.get('/:id', checklogin(), function(req, res) {
         delete db;
         res.redirect("../");
       }
-    }else{
+    } else {
       res.redirect("/question/");
     }
   });
