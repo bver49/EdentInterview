@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var dbsystem = require('../db');
 var config = require('../config');
-var path = require('path')
+var path = require('path');
 //For file upload
 var multer = require('multer');
 var multerS3 = require('multer-s3');

@@ -569,7 +569,9 @@ router.get('/del/:id', function(req, res) {
   } else {
     var id = req.params.id;
     var db = new dbsystem();
-    db.delete().from("user").where("id=", id).run(function(result) {
+    db.delete().from("user").where("id=",id).run(function(result) {
+      db = null;
+      delete db;
       res.redirect('/user/adminuser');
     });
   }
