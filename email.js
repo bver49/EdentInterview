@@ -49,6 +49,31 @@ exports.signup = function signup(email){
   });
 }
 
+exports.authorize = function authorize(user){
+  var html = "\
+  <body style='color:black;'>\
+    <p style='color:black;'>**此為自動發送信箱，請勿直接回覆**</p>\
+    <p style='color:black;'>親愛的同學您好，</p>\
+    <p style='color:black;'>您已通過驗證</p>\
+    <hr>\
+    <p style='color:black;'>醫甸面試 Edentedu.info</p>\
+    <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
+    <p style='color:black;'>官方網站：Edentedu.info</p>\
+    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+  </body>";
+  var options = {
+    from: '"醫甸面試" no-reply@edentedu.info',
+    to: user.email,
+    subject:'驗證成功',
+    html:html
+  }
+  transporter.sendMail(options, function(error, info) {
+    if (error) {
+      console.log(error);
+    }
+  });
+}
+
 exports.noticeTeacher = function noticeTeacher(student,teacher,question){
   var html = "\
   <body style='color:black;'>\

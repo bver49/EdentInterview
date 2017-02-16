@@ -280,9 +280,7 @@ router.get('/:id', checklogin(), function(req, res) {
     if (question.length > 0) {
       if ((question[0].status == 2 && req.user.status == 1) || (question[0].status == 1 && req.user.status == 2)) {
         //將狀態更新為老師或學生已讀
-        db.update().table("question").set({
-          status: 0
-        }).where("id=", req.params.id).run(function(result) {});
+        db.update().table("question").set({status: 0}).where("id=", req.params.id).run(function(result) {});
       }
       //題目屬於該學生
       if (question[0].user_id == req.user.id) {
@@ -325,7 +323,7 @@ router.get('/:id', checklogin(), function(req, res) {
       } else {
         db = null;
         delete db;
-        res.redirect("../");
+        res.redirect("/question/");
       }
     } else {
       res.redirect("/question/");

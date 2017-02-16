@@ -35,10 +35,18 @@ function days_between(d1, d2) {
   return Math.round(difference_ms / ONE_DAY);
 }
 
+router.get('/', function(req, res) {
+  if (req.user) {
+    res.redirect("/question/");
+  } else {
+    res.redirect("/");
+  }
+});
+
 //註冊
 router.get('/signup', function(req, res) {
   if (req.user) {
-    res.redirect("../");
+    res.redirect("/question/");
   } else {
     res.render('user/signup', {
       'user': null,
@@ -50,7 +58,7 @@ router.get('/signup', function(req, res) {
 //新增老師
 router.get('/addTeacher', function(req, res) {
   if (!req.user || req.user.status != 3) {
-    res.redirect("../");
+    res.redirect("/question/");
   } else {
     res.render('user/createTeacher', {
       'user': req.user
@@ -131,7 +139,7 @@ router.post('/create_t', function(req, res) {
 //登入頁面
 router.get('/login', function(req, res) {
   if (req.user) {
-    res.redirect("../");
+    res.redirect("/question/");
   } else {
     res.render('user/login', {
       'user': req.user,
@@ -187,7 +195,7 @@ router.post('/auth', function(req, res) {
 //編輯頁面
 router.get('/edit', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -199,7 +207,7 @@ router.get('/edit', function(req, res) {
 
 router.get('/editA', function(req, res) {
   if (!req.user || req.user.status !=1 ) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -211,7 +219,7 @@ router.get('/editA', function(req, res) {
 
 router.get('/editB', function(req, res) {
   if (!req.user || req.user.status !=1 ) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -223,7 +231,7 @@ router.get('/editB', function(req, res) {
 
 router.get('/editC', function(req, res) {
   if (!req.user || req.user.status !=1 ) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -235,7 +243,7 @@ router.get('/editC', function(req, res) {
 
 router.get('/editD', function(req, res) {
   if (!req.user || req.user.status !=2 ) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -246,7 +254,7 @@ router.get('/editD', function(req, res) {
 
 router.get('/editE', function(req, res) {
   if (!req.user || req.user.status !=2 ) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     res.render('user/edit', {
       'user': req.user,
@@ -258,7 +266,7 @@ router.get('/editE', function(req, res) {
 //更新資料A
 router.put('/updateA', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     req.checkBody('name', '請填寫姓名').notEmpty();
     req.checkBody('gender', '請選擇性別').notEmpty();
@@ -291,7 +299,7 @@ router.put('/updateA', function(req, res) {
 //更新資料B
 router.put('/updateB', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     req.checkBody('school', '請選擇報考校系').notEmpty();
     var errors = req.validationErrors();
@@ -314,7 +322,7 @@ router.put('/updateB', function(req, res) {
 //更新資料C
 router.put('/updateC', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     req.checkBody('adv', '請填寫優點').notEmpty();
     req.checkBody('disadv', '請選擇缺點').notEmpty();
@@ -349,7 +357,7 @@ router.put('/updateC', function(req, res) {
 //更新資料D
 router.put('/updateD',upload.any(),function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     var file = req.files[0];
     //需要檢查有沒有上船大頭貼
@@ -395,7 +403,7 @@ router.put('/updateD',upload.any(),function(req, res) {
 //更新資料E
 router.put('/updateE', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     req.checkBody('school', '請選擇面試過的校系').notEmpty();
     var errors = req.validationErrors();
@@ -427,7 +435,7 @@ router.get('/notice', function(req, res) {
         'title': "註冊醫甸面試"
       });
     } else {
-      res.redirect("../");
+      res.redirect("/");
     }
   } else {
     res.render('user/notice', {
@@ -439,7 +447,7 @@ router.get('/notice', function(req, res) {
 
 router.post('/notice', function(req, res) {
   if (!req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     req.checkBody('accoutnumber', '帳戶末5碼不可為空').notEmpty();
     req.checkBody('accoutnumber', '帳戶末5碼長度錯誤').len(5);
@@ -461,7 +469,7 @@ router.post('/notice', function(req, res) {
 //忘記密碼
 router.get('/forgetpw', function(req, res) {
   if (req.user) {
-    res.redirect("../");
+    res.redirect("/question/");
   } else {
     res.render('user/forgetpw', {
       'user':null
@@ -472,7 +480,7 @@ router.get('/forgetpw', function(req, res) {
 //發送重設密碼連結
 router.post('/forgetpw', function(req, res) {
   if (req.user) {
-    res.redirect("../");
+    res.send("Fail");
   } else {
     var db = new dbsystem();
     db.select().field("*").from("user").where("email=",req.body.email).run(function(user){
@@ -493,7 +501,7 @@ router.post('/forgetpw', function(req, res) {
 //更改密碼
 router.get('/editpw', function(req, res) {
   if (req.user || !req.query.email || !req.query.i ) {
-    res.redirect("../");
+    res.redirect("/");
   }
   else {
     var db = new dbsystem();
@@ -504,7 +512,7 @@ router.get('/editpw', function(req, res) {
           'id':user[0].id
         });
       }else{
-        res.redirect("../");
+        res.redirect("/");
       }
     });
   }
@@ -531,7 +539,7 @@ router.post('/editpw', function(req, res) {
 /* 管理用戶 */
 router.get('/adminuser', function(req, res) {
   if (!req.user || req.user.status != 3) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     var db = new dbsystem();
     if(req.query.s == 2){
@@ -570,14 +578,17 @@ router.get('/del/:id', function(req, res) {
 /* 批准用戶 */
 router.get('/authorize/:id', function(req, res) {
   if (!req.user || req.user.status != 3) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     var id = req.params.id;
     var db = new dbsystem();
-    db.update().table("user").where("id=", id).set({status:1}).run(function(result){
-      db = null;
-      delete db;
-      res.redirect('/user/adminuser');
+    db.select().field("*").from("user").where("id=",id).run(function(user){
+      mailer.authorize(user[0]);
+      db.update().table("user").where("id=", id).set({status:1}).run(function(result){
+        db = null;
+        delete db;
+        res.redirect('/user/adminuser');
+      });
     });
   }
 });
@@ -592,7 +603,7 @@ router.get('/logout', function(req, res) {
 //查看會員資料
 router.get('/:id', function(req, res) {
   if (!req.user || req.user.status != 3) {
-    res.redirect("../");
+    res.redirect("/");
   } else {
     var id = req.params.id;
     var status = req.query.s;
