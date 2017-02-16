@@ -45,14 +45,18 @@
   <% }else{ %>
     <div class="ui stackable grid">
       <div class="six wide column centered whitebg">
-        <div style="width:80%;display:block;margin:0 auto;">
-          <br><br><br>
+        <div style="width:80%;display:block;margin:0 auto;line-height:1.8rem;">
+          <br>
           <h1 class="textcenter greens h1">已收到您的轉帳資料</h1>
-          <br><br><br>
-          <p class="textcenter blacks h3">我們將於2個工作日內確認您的資料，並寄發開通連結至<%= user.email %>請您耐心等後，謝謝！</p>
-          <br><br>
+          <br>
+          <p class="textcenter blacks h3">
+          我們將於2個工作日內確認您的資料，<br>
+          並寄發開通連結至<br>
+          <%= user.email %><br>
+          請您耐心等候，謝謝！<br><br>
+          超過兩日仍未開通者，請通知管理員 contact@edentedu.info</p>
           <a href="/user/logout" class="ui button greenbg center">回首頁</a>
-          <br><br><br><br><br>
+          <br>
         </div>
       </div>
     </div>

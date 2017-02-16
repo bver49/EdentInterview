@@ -574,9 +574,7 @@ router.get('/authorize/:id', function(req, res) {
   } else {
     var id = req.params.id;
     var db = new dbsystem();
-    db.update().table("user").where("id=", id).set({
-      status: 1
-    }).run(function(result) {
+    db.update().table("user").where("id=", id).set({status:1}).run(function(result){
       db = null;
       delete db;
       res.redirect('/user/adminuser');
