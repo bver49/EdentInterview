@@ -1,7 +1,7 @@
 <div id="notselect">
   <h1 class="h1 greens textcenter bold">上傳影片</h1>
   <img src="/assets/img/upload.png" id="uploadicon">
-  <p class="h3 textcenter blacks bold" id="description">影片最大:800MB<br><br>影片格式:mp4</p>
+  <p class="h3 textcenter blacks bold" id="description">影片最大:800MB<br><br>影片格式:mp4、mov</p>
   <p class="h3 textcenter reds bold mobile"><br>題目在下方</p>
 </div>
 <div id="select" style="display:none;">
@@ -63,11 +63,7 @@ $(document).ready(function(){
         alert("檔案大小超出限制(800mb)!");
 
       }
-      else if( file.type != "video/mp4"){
-        resetpage();
-        alert("請上傳mp4檔案!");
-      }
-      else{
+      else if( file.type == "video/mp4" || file.type == "video/quicktime"){
         $("#select").hide();
         $("#uploading").show();
         var time = (file.size/(100*1024*1024))*180;
@@ -91,7 +87,12 @@ $(document).ready(function(){
         }).fail(function(msg) {
           $("#file").val('');
           alert("檔案上傳出錯!");
+          window.location.href = window.location.href;
         });
+      }
+      else{
+        resetpage();
+        alert("請上傳mp4或mov檔案!");
       }
     }
   });
