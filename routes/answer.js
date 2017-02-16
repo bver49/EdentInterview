@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var dbsystem = require('../db');
 var config = require('../config');
+var path = require('path')
 //For file upload
 var multer = require('multer');
 var multerS3 = require('multer-s3');
@@ -21,7 +22,7 @@ var upload = multer({
     acl: 'public-read',
     bucket: 'edent',
     key: function(req, file, cb) {
-      cb(null, file.originalname);
+      cb(null,req.user.id+"_"+new Date().getTime()+path.extname(file.originalname));
     }
   }),
   limits: {
@@ -31,14 +32,13 @@ var upload = multer({
 
 /* 上傳檔案 */
 router.post("/upload", upload.any(), function(req, res) {
-  req.on('close', function(err) { console.log("abort"); });
   var file = req.files[0];
   var db = new dbsystem();
   var data = {
     url: file.location,
     question_id: req.body.question_id,
     user_id: req.user.id,
-    awskey: file.originalname
+    awskey: file.key
   }
   db.insert().into("answer").set(data).run(function(result) {
     db = null;

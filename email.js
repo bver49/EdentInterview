@@ -53,8 +53,9 @@ exports.authorize = function authorize(user){
   var html = "\
   <body style='color:black;'>\
     <p style='color:black;'>**此為自動發送信箱，請勿直接回覆**</p>\
-    <p style='color:black;'>親愛的同學您好，</p>\
+    <p style='color:black;'>親愛的 "+user.name+" 同學您好，</p>\
     <p style='color:black;'>您已通過驗證</p>\
+    <p style='color:black;'>歡迎登入本站大平台 http://edentedu.info/user/login</p>\
     <hr>\
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
