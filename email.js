@@ -58,7 +58,7 @@ exports.noticeTeacher = function noticeTeacher(student,teacher,question){
     <p style='color:black;'>學生姓名："+student.name+"</p>\
     <p style='color:black;'>學生報考校系："+student.school+"</p>\
     <p style='color:black;'>題目："+question.content+"</p>\
-    <p style='color:black;'>回答網址：http:\/\/localhost:3000\/question\/"+question.id+"</p>\
+    <p style='color:black;'>回答網址：http://edentedu.info/"+question.id+"</p>\
     <p style='color:black;'>請您儘快登入本站大平台，並請於<span style='color:rgb(229,92,136);'>「3天內」</span>給予回覆。</p>\
     <p style='color:black;'>如有不知如何回答的問題，請於老師團群聊發問。</p>\
     <p style='color:black;'>如有其他任何問題，請私訊佑儒。</p>\
@@ -91,7 +91,7 @@ exports.noticeStudent = function noticeStudent(student,teacher,comment,question)
     <p style='color:black;'>親愛的 "+student.name+" 同學您好，</p>\
     <p style='color:black;'>您於前陣子上傳的影片已被老師回應：</p>\
     <p style='color:black;'>題目： "+question.content+"</p>\
-    <p style='color:black;'>題目網址：http:\/\/localhost:3000\/question\/"+question.id+"</p>\
+    <p style='color:black;'>題目網址：http://edentedu.info/"+question.id+"</p>\
     <p style='color:black;'>老師："+teacher.name+" "+teacher.nowschool+"</p>\
     <p style='color:black;'>回應內容：</p>\
     <p style='color:black;'>"+comment+"</p>\
@@ -142,7 +142,7 @@ exports.forgetPw = function forgetPw(user) {
     <p style='color:black;'>**此為自動發送信箱，請勿直接回覆**</p>\
     <p style='color:black;'>親愛的 "+user.name+" 您好，</p>\
     <p style='color:black;'>請透過以下連結重設密碼</p>\
-    <p style='color:black;'>http://localhost:3000/user/editpw?email="+user.email+"&i="+user.id+"</p>\
+    <p style='color:black;'>http://edentedu.info/user/editpw?email="+user.email+"&i="+user.id+"</p>\
     <p style='color:black;'>若您未曾於醫甸面試點選「忘記密碼」，請立刻寄信至聯絡信箱（contact@edentedu.info）舉報此問題！若有其他疑慮，請洽下方聯絡管道。</p>\
     <p style='color:black;'>醫甸面試團隊<p>\
     <p style='color:black;'>敬上<p>\
