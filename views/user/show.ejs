@@ -28,6 +28,14 @@
         </div><br>
         <div class="inline fields">
           <div class="four wide field">
+            <label>聯絡地址</label>
+          </div>
+          <div class="ten wide field">
+            <input type="text" name="address" value="<%= data.address %>" readonly>
+          </div>
+        </div><br>
+        <div class="inline fields">
+          <div class="four wide field">
             <label>生日</label>
           </div>
           <div class="ten wide field">
@@ -326,6 +334,7 @@
       var birth = "<%= data.birth %>";
       birth = birth.split("/");
       $("input[value=<%= data.gender %>]").attr("checked", true);
+      $("input[value=<%= data.justgraduate %>]").attr("checked", true);
       $("#years option[value="+birth[0]+"]").prop({selected: true});
       $("#months option[value="+birth[1]+"]").prop({selected: true});
       $("#days option[value="+birth[2]+"]").prop({selected: true});

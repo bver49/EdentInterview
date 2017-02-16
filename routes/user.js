@@ -600,14 +600,14 @@ router.get('/:id', function(req, res) {
     var status = req.query.s;
     var db = new dbsystem();
     if (status == 1 || status == 0) {
-      db.select().field(["u.*", "s.hobby", "s.oneword", "s.adv", "s.disadv", "s.person", "s.account", "(SELECT COUNT(*) FROM questionlist WHERE questionlist.user_id = u.id ) AS qmt"]).from("user u").join("student s").where("s.user_id=u.id").where("u.id=", id).run(function(users) {
+      db.select().field(["u.*", "s.hobby", "s.oneword", "s.adv", "s.disadv", "s.person", "s.account","s.address"]).from("user u").join("student s").where("s.user_id=u.id").where("u.id=", id).run(function(users) {
         res.render('user/show', {
           'user': req.user,
           'data': users[0]
         });
       });
     } else {
-      db.select().field(["u.*", "t.avatar"]).from("user u").join("teacher t").where("t.user_id=u.id").where("u.id=", id).run(function(users) {
+      db.select().field(["u.*", "t.avatar","t.grade"]).from("user u").join("teacher t").where("t.user_id=u.id").where("u.id=", id).run(function(users) {
         res.render('user/show', {
           'user': req.user,
           'data': users[0]
