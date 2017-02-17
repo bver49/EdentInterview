@@ -106,25 +106,77 @@ router.get('/', checklogin(), function(req, res) {
 router.post('/create/:id/:qlid', function(req, res) {
   if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
     var db = new dbsystem();
-    //挑出一位老師
-    db.select().field(["id", "name", "email", "(SELECT COUNT(*) FROM question WHERE question.teacher_id = user.id ) AS qmt"]).from("user").where("status=2").order("qmt").order("id").limit(1).run(function(teacher) {
-      db.select().field(["id", "content"]).from("question").where("id=", req.params.id).run(function(question) {
-        mailer.noticeTeacher(req.user, teacher[0], question[0]);
-        //將狀態更新為學生已回答分配老師
-        var data = {
-          teacher_id: teacher[0].id,
-          teacher_name: teacher[0].name,
-          status: 1
-        }
-        db.update().table("question").set(data).where("id=", req.params.id).run(function(result) {
-          db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function(result) {
-            db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=", 1).run(function(questionlist) {
+    db.select().field(["id", "content"]).from("question").where("id=", req.params.id).run(function(question) {
+      if(question.length > 0 && question[0].teacher_id==0){
+        //挑出一位老師
+        db.select().field(["id", "name", "email", "(SELECT COUNT(*) FROM question WHERE question.teacher_id = user.id ) AS qmt"]).from("user").where("status=2").order("qmt").order("id").limit(1).run(function(teacher) {
+          mailer.noticeTeacher(req.user, teacher[0], question[0]);
+          //將狀態更新為學生已回答分配老師
+          var data = {
+            teacher_id: teacher[0].id,
+            teacher_name: teacher[0].name,
+            status: 1
+          }
+          db.update().table("question").set(data).where("id=", req.params.id).run(function(result) {
+            db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function(result) {
+              db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=", 1).run(function(questionlist) {
+                var list = [];
+                for (var i in questionlist) {
+                  list.push(questionlist[i].exam_id);
+                }
+                var school = req.user.school.split(",");
+                //篩選題目
+                give_question(db, school, list, function(exam) {
+                  if (exam.length > 0) {
+                    var data = {
+                      exam_id: exam[0].id,
+                      user_id: req.user.id
+                    }
+                    db.insert().into("questionlist").set(data).run(function(result) {
+                      var data = {
+                        content: exam[0].content,
+                        tag: exam[0].tag,
+                        user_id: req.user.id,
+                        questionlist_id: result.insertId
+                      }
+                      db.insert().into("question").set(data).run(function(result) {
+                        db = null;
+                        delete db;
+                        res.send("Success");
+                      });
+                    });
+                  } else {
+                    res.send("Fail");
+                  }
+                });
+              });
+            });
+          })
+        });
+      }
+      else {
+        res.send("Fail");
+      }
+    });
+  } else {
+    res.send("Fail");
+  }
+});
+
+/* 跳過一題 */
+router.post('/skipq/:id/:qlid', function(req, res) {
+  if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
+    var db = new dbsystem();
+    db.select().field("teacher_id").from("question").where("id=", req.params.id).run(function(question){
+      if(question.length > 0 && question[0].teacher_id==0){
+        db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function(result) {
+          db.delete().from("question").where("id=", req.params.id).run(function(result) {
+            db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=",1).run(function(questionlist) {
               var list = [];
               for (var i in questionlist) {
                 list.push(questionlist[i].exam_id);
               }
               var school = req.user.school.split(",");
-              //篩選題目
               give_question(db, school, list, function(exam) {
                 if (exam.length > 0) {
                   var data = {
@@ -148,54 +200,12 @@ router.post('/create/:id/:qlid', function(req, res) {
                   res.send("Fail");
                 }
               });
-              // 篩選題目END
             });
           });
-        })
-      });
-    });
-  } else {
-    res.send("Fail");
-  }
-});
-
-/* 跳過一題 */
-router.post('/skipq/:id/:qlid', function(req, res) {
-  if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
-    var db = new dbsystem();
-    db.update().table("questionlist").set({skip: 1}).where("id=", req.params.qlid).run(function() {
-      db.delete().from("question").where("id=", req.params.id).run(function() {
-        db.select().field("*").from("questionlist").where("user_id=", req.user.id).where("skip=",1).run(function(questionlist) {
-          var list = [];
-          for (var i in questionlist) {
-            list.push(questionlist[i].exam_id);
-          }
-          var school = req.user.school.split(",");
-          give_question(db, school, list, function(exam) {
-            if (exam.length > 0) {
-              var data = {
-                exam_id: exam[0].id,
-                user_id: req.user.id
-              }
-              db.insert().into("questionlist").set(data).run(function(result) {
-                var data = {
-                  content: exam[0].content,
-                  tag: exam[0].tag,
-                  user_id: req.user.id,
-                  questionlist_id: result.insertId
-                }
-                db.insert().into("question").set(data).run(function(result) {
-                  db = null;
-                  delete db;
-                  res.send("Success");
-                });
-              });
-            } else {
-              res.send("Fail");
-            }
-          });
         });
-      });
+      }else{
+        res.send("Fail");
+      }
     });
   } else {
     res.send("Fail");
