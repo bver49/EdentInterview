@@ -22,8 +22,8 @@ exports.signup = function signup(email){
     <p style='color:black;'>帳號：234540216706</p>\
     <p style='color:black;'>戶名：醫甸園科技股份有限公司</p>\
     <p style='color:black;'>您可以使用您在地的ATM進行轉帳，並請保留交易明細表。</p>\
-    <p style='color:black;'>2.輸入帳號末四碼：登入醫甸面試官網，\
-    輸入剛剛用來轉帳的帳號末四碼（轉出帳號末四碼），\
+    <p style='color:black;'>2.輸入轉帳帳號末五碼：登入醫甸面試官網，\
+    輸入剛剛用來轉帳的帳號末五碼（轉出帳號末五碼），\
     輸入後，我們將以人工進行審核，盡快為您開通帳號、完成註冊。</p>\
     <br>\
     <p style='color:black;'>如有任何問題，請洽下方聯絡管道！</p>\
