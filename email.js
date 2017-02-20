@@ -34,7 +34,7 @@ exports.signup = function signup(email){
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
     <p style='color:black;'>官方網站：Edentedu.info</p>\
-    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+    <p style='color:black;'>粉絲團：facebook.com/edent.tech</p>\
   </body>";
   var options = {
     from: '"醫甸面試" no-reply@edentedu.info',
@@ -60,7 +60,7 @@ exports.authorize = function authorize(user){
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
     <p style='color:black;'>官方網站：Edentedu.info</p>\
-    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+    <p style='color:black;'>粉絲團：facebook.com/edent.tech</p>\
   </body>";
   var options = {
     from: '"醫甸面試" no-reply@edentedu.info',
@@ -95,7 +95,7 @@ exports.noticeTeacher = function noticeTeacher(student,teacher,question){
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
     <p style='color:black;'>官方網站：Edentedu.info</p>\
-    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+    <p style='color:black;'>粉絲團：facebook.com/edent.tech</p>\
   </body>";
   var options = {
     from:'"醫甸面試" no-reply@edentedu.info',
@@ -132,7 +132,7 @@ exports.noticeStudent = function noticeStudent(student,teacher,comment,question)
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
     <p style='color:black;'>官方網站：Edentedu.info</p>\
-    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+    <p style='color:black;'>粉絲團：facebook.com/edent.tech</p>\
   </body>"
   var options = {
     from:'"醫甸面試" no-reply@edentedu.info',
@@ -176,7 +176,7 @@ exports.forgetPw = function forgetPw(user) {
     <p style='color:black;'>醫甸面試 Edentedu.info</p>\
     <p style='color:black;'>聯絡信箱：contact@edentedu.info</p>\
     <p style='color:black;'>官方網站：Edentedu.info</p>\
-    <p style='color:black;'>粉絲團：facebook.com/ednet.tech</p>\
+    <p style='color:black;'>粉絲團：facebook.com/edent.tech</p>\
   </body>";
   var options = {
     from: '"醫甸面試" no-reply@edentedu.info',
