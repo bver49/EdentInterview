@@ -18,7 +18,7 @@ exports.signup = function signup(email){
     增強您的面試能力，讓您戰勝醫學系、牙醫系的面試大魔王。醫甸面試團隊已經收到您的註冊資料，\
     為了完成註冊，請您於「3天內」依序完成以下兩件事：</p>\
     <p style='color:black;'>1.匯款：將 3600元轉入本團隊帳戶：\
-    <p style='color:black;'>銀行：中國信託</p>\
+    <p style='color:black;'>銀行：中國信託（博愛分行）</p>\
     <p style='color:black;'>帳號：234540216706</p>\
     <p style='color:black;'>戶名：醫甸園科技股份有限公司</p>\
     <p style='color:black;'>您可以使用您在地的ATM進行轉帳，並請保留交易明細表。</p>\
