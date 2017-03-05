@@ -106,7 +106,7 @@ router.get('/', checklogin(), function(req, res) {
 router.post('/create/:id/:qlid', function(req, res) {
   if (req.user && req.user.status == 1 && req.user.qmt <= 12 && req.params.id && req.params.qlid) {
     var db = new dbsystem();
-    db.select().field(["id", "content"]).from("question").where("id=", req.params.id).run(function(question) {
+    db.select().field(["id", "content","teacher_id"]).from("question").where("id=", req.params.id).run(function(question) {
       if(question.length > 0 && question[0].teacher_id==0){
         //挑出一位老師
         db.select().field(["id", "name", "email", "(SELECT COUNT(*) FROM question WHERE question.teacher_id = user.id ) AS qmt"]).from("user").where("status=2").order("qmt").order("id").limit(1).run(function(teacher) {
