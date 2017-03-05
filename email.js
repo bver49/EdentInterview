@@ -89,7 +89,7 @@ exports.noticeTeacher = function noticeTeacher(student,teacher,question){
     <p style='color:black;'>學生姓名："+student.name+"</p>\
     <p style='color:black;'>學生報考校系："+student.school+"</p>\
     <p style='color:black;'>題目："+question.content+"</p>\
-    <p style='color:black;'>回答網址：http://edentedu.info/"+question.id+"</p>\
+    <p style='color:black;'>回答網址：http://edentedu.info/question/"+question.id+"</p>\
     <p style='color:black;'>請您儘快登入本站大平台，並請於<span style='color:rgb(229,92,136);'>「3天內」</span>給予回覆。</p>\
     <p style='color:black;'>如有不知如何回答的問題，請於老師團群聊發問。</p>\
     <p style='color:black;'>如有其他任何問題，請私訊佑儒。</p>\
@@ -122,7 +122,7 @@ exports.noticeStudent = function noticeStudent(student,teacher,comment,question)
     <p style='color:black;'>親愛的 "+student.name+" 同學您好，</p>\
     <p style='color:black;'>您於前陣子上傳的影片已被老師回應：</p>\
     <p style='color:black;'>題目： "+question.content+"</p>\
-    <p style='color:black;'>題目網址：http://edentedu.info/"+question.id+"</p>\
+    <p style='color:black;'>題目網址：http://edentedu.info/question/"+question.id+"</p>\
     <p style='color:black;'>老師："+teacher.name+" "+teacher.nowschool+"</p>\
     <p style='color:black;'>回應內容：</p>\
     <p style='color:black;'>"+comment+"</p>\
