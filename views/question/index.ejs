@@ -50,7 +50,7 @@
               <!-- 學生:出題目的時間 -->
               <% if(user.status==1){ %>
                 <br><br>
-                <%= date.getFullYear()+"/"+date.getMonth()+1+"/"+date.getDate() %>
+                <%= date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate() %>
                 &nbsp;
                 <%= date.getHours()+":"+date.getMinutes() %>
               <!-- 老師/管理員:學生回答時間 -->

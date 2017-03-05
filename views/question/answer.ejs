@@ -134,15 +134,12 @@
     });
 
     function resize(){
+      $("#video").css("height",$("#video").width()*0.6);
       if($(document).width() > 640){
         $("#answerarea").css("height",($(document).height() - 90));
-        $("#video").css("height","220");
       }
       else{
-        $("#answerarea").css("height",($("#answerarea").height()+150));
-        <% if(answer.length > 0){ %>
-          $("#video").css("height","240");
-        <% } %>
+        $("#answerarea").css("height",($("#answerarea").height()+120));
       }
     }
   </script>

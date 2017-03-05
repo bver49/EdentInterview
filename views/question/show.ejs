@@ -10,7 +10,7 @@
 	<div class="content">
 		<div class="upper">
 			<div class="preview">
-				<video width="100%" controls>
+				<video width="100%" controls id="video">
 					<source src="<%= answer.url %>" type="video/mp4">
 				</video>
 			</div>
@@ -80,7 +80,10 @@
 			</div>
 		</div>
 	</div>
-	<script>adjustpic();</script>
+	<script>
+		adjustpic();
+		$("#video").css("height",$("#video").width()*0.6);
+	</script>
 <% }else{ %>
 	<div class="content">
 		<div class="upper">
