@@ -58,7 +58,7 @@
                 <br><br>
                 <% var answerdate = new Date(question[i].answertime) %>
                 學生回答時間 :&nbsp;
-                <%= answerdate.getFullYear()+"/"+answerdate.getMonth()+1+"/"+answerdate.getDate() %>
+                <%= answerdate.getFullYear()+"/"+(answerdate.getMonth()+1)+"/"+answerdate.getDate() %>
                 &nbsp;
                 <%= answerdate.getHours()+":"+answerdate.getMinutes() %>
               <% } %>
