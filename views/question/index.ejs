@@ -2,8 +2,6 @@
 <% if(question.length > 0){ %>
   <div class="ui stackable grid">
     <% for(var i in question){ %>
-      <% var tag = question[i].tag.split(",") %>
-      <% var date = new Date(question[i].created_at) %>
       <% if(i%3==0){ %>
         <div class="row">
           <div class="two wide column computer only"></div>
@@ -43,6 +41,7 @@
               <% } %>
             <% } %>
             <div class="meta">
+              <% var tag = question[i].tag.split(",") %>
               <% for(var k in tag){ %>
                 <% if(k>2) break; %>
                 <%= "#"+tag[k] %>&nbsp;&nbsp;
@@ -50,6 +49,7 @@
               <!-- 學生:出題目的時間 -->
               <% if(user.status==1){ %>
                 <br><br>
+                <% var date = new Date(question[i].created_at) %>
                 <%= date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate() %>
                 &nbsp;
                 <%= date.getHours()+":"+date.getMinutes() %>
