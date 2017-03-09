@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="seven wide column" style="background-color:#f2f5f6;">
-      <img src="/assets/img/pic1.png" style="width:100%;margin:0 auto;display:block;">
+      <iframe style="width:100%;margin:40px 0px;" src="https://www.youtube.com/embed/C_7uprCa1sI" frameborder="0" allowfullscreen id="video"></iframe>
     </div>
   </div>
   <div class="row" style="padding-top:50px;padding-bottom:50px;">
@@ -175,3 +175,8 @@
   }
 }
 </style>
+<script>
+  $(document).ready(function() {
+    $("#video").height($("#video").width()*0.6);
+  });
+</script>
