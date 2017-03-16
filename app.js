@@ -98,6 +98,13 @@ app.get("/faq",function(req,res){
   })
 });
 
+
+app.get("/hint",function(req,res){
+  res.render("hint",{
+    'user':req.user
+  })
+});
+
 app.listen(3000, function() {
   console.log('Server listening on port 3000!');
 });

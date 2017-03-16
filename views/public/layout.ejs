@@ -36,7 +36,7 @@
     	<div class="linkset">
         <% if(user && user.edit==1){ %>
           <% if(user.status < 2 && user.edit!= 0){ %>
-            <a href="https://fbshare.medcode.in/" class="link">面試秘笈</a>
+            <a href="/hint" class="link">面試秘笈</a>
             <a href="/question/answer" class="link">模擬影片問答</a>
             <a href="/question/view" class="link">看面試題</a>
             <a href="/question/" class="link">答題紀錄</a>
@@ -54,7 +54,6 @@
         <% }else if(user && user.edit==0){ %>
           <a href="/user/logout" class="button">登出</a>
         <% }else{ %>
-          <a href="https://fbshare.medcode.in/" class="link">面試秘笈</a>
           <a href="/faq" class="link">常見問題</a>
           <a href="/user/signup" style="color:rgb(229,92,135);" class="link">馬上註冊</a>
           <a href="/user/login" class="link">登入</a>
