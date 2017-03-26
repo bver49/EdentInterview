@@ -24,10 +24,11 @@ var upload = multer({
     key: function(req, file, cb) {
       cb(null,req.user.id+"_"+new Date().getTime()+path.extname(file.originalname));
     }
-  }),
+  })
+  /*,
   limits: {
     fileSize: 800 * 1024 * 1024
-  }
+  }*/
 });
 
 /* 上傳檔案 */
