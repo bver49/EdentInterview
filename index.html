@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>醫甸面試</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="https://fbshare.medcode.inassets/img/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="assets/js/semantic.js"></script>
+    <script src="assets/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/semantic.css">
+    <link rel='stylesheet' href='assets/css/style.css' />
+    <script>
+        $(document).ready(function() {
+            $("body").css("background", "white");
+            $(".body").css("margin-top", "25px");
+            $("#video").height($("#video").width() * 0.6);
+        });
+    </script>
+    <style>
+        .intro {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            padding: 100px 0px 0px 100px;
+        }
+
+        .description {
+            width: 80%;
+            display: block;
+            margin: 0 auto;
+            padding: 50px 0px 0px 50px;
+        }
+
+        .pic,
+        .word,
+        .block {
+            display: inline-block;
+        }
+
+        .block {
+            width: 28%;
+        }
+
+        .left {
+            display: none;
+        }
+
+        .pic {
+            width: 25%;
+            box-sizing: border-box;
+        }
+
+        .pic img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #3dabaf;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .word {
+            width: 45%;
+            vertical-align: top;
+            word-wrap: break-word;
+            line-height: 1.2rem;
+        }
+
+        .name {
+            color: #3dabaf;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 640px) {
+            .intro {
+                text-align: center;
+                padding: 50px 0px;
+            }
+
+            .description {
+                width: 100%;
+                padding: 20px 10px;
+                text-align: center;
+            }
+
+            .right {
+                display: none;
+            }
+            .left {
+                display: block;
+            }
+            .pic,
+            .word {
+                width: 100%;
+            }
+            .pic {
+                margin-bottom: 10px;
+            }
+            .word {
+                text-align: center;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu">
+        <div class="background"></div>
+        <div class="stuffing"></div>
+        <div class="title">
+            <a href="/">
+                <img class="logo" src="assets/img/logo.png">
+        	    <p class="name">醫甸面試</p>
+            </a>
+        </div>
+        <div class="burger"><span></span></div>
+        <div class="linkset">
+            <a href="faq.html" class="link">常見問題</a>
+            <a href="/user/signup" style="color:rgb(229,92,135);" class="link">馬上註冊</a>
+            <a href="/user/login" class="link">登入</a>
+            <a href="" class="link"></a>
+        </div>
+    </div>
+    <div class="body">
+
+        <div class="ui stackable grid centered">
+            <div class="row">
+                <div class="seven wide column" style="background-color:#f2f5f6;">
+                    <div class="intro">
+                        <h1 class="blacks" style="font-size:3rem; font-weight:bold;">醫甸面試</h1><br><br>
+                        <p class="greens" style="font-size:1.5rem;">由學長姊組成，幫助醫學、牙醫系面試考生的平台。</p><br><br><br>
+                        <a href="/user/signup" style="font-weight:bold;font-size:1.2rem;width:30%;background:rgb(229,92,135);color:white;padding:8px 20px;border-top-left-radius:50px;border-top-right-radius:50px;border-bottom-left-radius:50px;border-bottom-right-radius:50px;">馬上註冊</a>
+                    </div>
+                </div>
+                <div class="seven wide column" style="background-color:#f2f5f6;">
+                    <iframe style="width:100%;margin:40px 0px;" src="https://www.youtube.com/embed/C_7uprCa1sI" frameborder="0" allowfullscreen id="video"></iframe>
+                </div>
+            </div>
+            <div class="row" style="padding-top:50px;padding-bottom:50px;">
+                <div class="five wide column">
+                    <div style="width:80%;display:block;margin:0 auto;">
+                        <h1 class="greens" style="font-size:3rem;text-align:center;">100+考古題</h1><br>
+                        <p class="blacks" style="font-size:1rem;font-weight:bold;line-height:1.5rem;">我們向學長姐們收集他們被問過的題目，或題綱接近的題目，超過100題的題庫，讓考古題成為你準備面試的得力助手</p>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div style="width:80%;display:block;margin:0 auto;">
+                        <h1 class="greens" style="font-size:3rem;text-align:center;">線上模擬問答</h1><br>
+                        <p class="blacks" style="font-size:1rem;font-weight:bold;line-height:1.5rem;">看題十遍不如做題一次：看到想挑戰的題目，即刻上傳影片，將獲得12次不同學長姐的多元回饋，知己知彼、百戰百勝。</p>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div style="width:80%;display:block;margin:0 auto;">
+                        <h1 class="greens" style="font-size:3rem;text-align:center;">團報優惠</h1><br>
+                        <p class="blacks" style="font-size:1rem;font-weight:bold;line-height:1.5rem;">為了鼓勵更多的醫牙學長姐加入我們、收集更多寶貴的經驗，我們針對個人收費3600元，三人團報現在打折三人只要10200元（現省600）。使用本服務提升面試能力之外，您的支持可以讓醫甸面試更好。</p>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="seven wide column" style="background-color: #f2f5f6;">
+                    <div class="description">
+                        <h1 class="greens" style="font-size:3rem;font-weight:bold;text-align:center;">設計理念</h1><br><br>
+                        <p class="blacks" style="font-size:1rem;font-weight:bold;line-height:1.5rem;">醫科、牙科的面試對於高中生來說可說生涯中最大考驗：正取或備取，可以決定人的一生，為了幫助各位考生完成夢想。我們設計出了醫甸面試：多元的各方觀點，面試的指導將不再僅限於補習班、學校輔導老師。而是來自各醫、牙學系，真正挑戰過、並且獲勝的面試入學在校生，透過他們的觀點、建議，相信能給考生們很大的啟發。</p><br><br><br>
+                    </div>
+                </div>
+                <div class="seven wide column" style="background-color: #f2f5f6;">
+                    <img src="assets/img/pic2.png" style="width:100%;margin-top:50px;margin-bottom:50px;display:block;">
+                </div>
+            </div>
+            <h1 class="greens" style="text-align:center;font-size:3rem;font-weight:bold;padding-top:25px;">老師群</h1>
+            <div class="row" style="padding-top:50px;">
+                <div class="twelve wide column">
+                    <div class="pic"><img src="assets/img/t1.jpg"></div>
+                    <div class="word bold" style="line-height:1.8rem;">
+                        <span class="name">王筱玟</span><br><br> 國立台灣大學醫學系一年級 ，興趣為跳舞 (曾為衛道女熱舞社社長)。對於該認真的事情就會非常認真地努力。想對學弟妹說：「對於自己未來的每一道關卡(包括面試啦)，都要在準備時謙卑，在上場時自信! 」</div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+                <div class="twelve wide column">
+                    <div class="block"></div>
+                    <div class="pic left"><img src="assets/img/t2.jpg"></div>
+                    <div class="word bold" style="line-height:1.8rem;">
+                        <span class="name">鄭凱陽</span><br><br> 高雄醫學大學牙醫系一年級，開朗外向，喜歡和人群交往。平常興趣攝影、網球。想對學弟妹說： 「認真生活，無餘力地做好每一件事情，因為人生只有一次，毋寧苟活。」</div>
+                    <div class="pic right"><img src="assets/img/t2.jpg"></div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+                <div class="twelve wide column">
+                    <div class="pic"><img src="assets/img/t3.jpg"></div>
+                    <div class="word bold" style="line-height:1.8rem;">
+                        <span class="name">曹友謙</span><br><br> 國立成功大學醫學系一年級，我想要以所做的一切事情感動週遭的人。為此，我能充滿信念面對人生，同時讓人感受到熱情喜悅。 想對學弟妹說：「面試，是呈現真實的自己。相信真實的自己，這股力量足以讓你成為夜空中閃耀的星。」</div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:25px;">
+                <div class="twelve wide column">
+                    <div class="block"></div>
+                    <div class="pic left"><img src="assets/img/t4.jpg"></div>
+                    <div class="word bold" style="line-height:1.8rem;">
+                        <span class="name">洪心恬</span><br><br> 高雄醫學大學醫學系一年級，喜歡高醫盛行的運動風氣，善於與人交際，對於生活充滿了希望。喜歡去探索新鮮事，不喜歡侷限在某一個小小領域！想對學弟妹說一句九把刀的名言：「說出來會被嘲笑的夢想，才有被實現的價值。」
+                    </div>
+                    <div class="pic right"><img src="assets/img/t4.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-left">醫甸園科技股份有限公司 All rights reserved</div>
+        <div class="footer-right">
+            <a href="mailto:contact@edentedu.info">聯絡我們</a> ｜
+            <a href="/privacy">隱私權政策</a>
+        </div>
+    </div>
+</body>
+
+</html>
